@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-        class="w-screen pt-12 px-24"
+        class="w-screen pt-20 px-12"
     >
       <slot name="body"></slot>
     </div>

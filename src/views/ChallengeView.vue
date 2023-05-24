@@ -1,18 +1,18 @@
 <template>
+      <ChallengeInfo/>
   <LSection>
     <template #body>
-      <h1>Challenges</h1>
-
     </template>
   </LSection>
 </template>
 
 <script>
 import LSection from "@/components/layout/LSection.vue";
+import ChallengeInfo from "@/components/ChallengeInfo.vue";
 
 export default {
   name: "ChallengesView",
-  components: {LSection}
+  components: {ChallengeInfo, LSection}
 }
 </script>
 

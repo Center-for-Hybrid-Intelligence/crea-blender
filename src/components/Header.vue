@@ -2,7 +2,7 @@
   <div class="flex justify-between z-50 absolute w-screen top-0 p-8">
     <router-link to="/">
       <img src="../assets/home.png" alt="Home"
-           class="w-12 h-12 object-contain cursor-pointer"
+           class="w-12 h-12 object-contain cursor-pointer  hover"
     /></router-link>
 
 
@@ -10,10 +10,10 @@
     <div class="flex gap-4">
 
     <img src="../assets/danish.jpg" alt="Home"
-    class="h-8 cursor-pointer  object-contain "
+    class="h-8 cursor-pointer  object-contain  hover"
     />
     <img src="../assets/english.jpg" alt="Home"
-    class=" h-8 cursor-pointer object-contain"
+    class=" h-8 cursor-pointer object-contain hover"
     />
     </div>
   </div>

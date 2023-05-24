@@ -9,7 +9,7 @@
         </div>
     </template>
     <template #body>
-      <div class="text-sm">
+      <div class="text-xs">
       Understand the basis of the game
 
       </div>
