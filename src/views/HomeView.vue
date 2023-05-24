@@ -16,6 +16,12 @@
         </div>
 
       </div>
+      <div class="absolute bottom-0 right-0 p-8">
+        <router-link to="/about" >
+          <img src="../../src/assets/ScienceAtHome.png" alt="Placeholder Image" class="h-16 cursor-pointer object-contain">
+        </router-link>
+
+      </div>
 
 
     </template>

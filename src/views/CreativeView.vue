@@ -1,7 +1,7 @@
 <template>
   <LSection>
     <template #body>
-      <h1>Challenges</h1>
+      <h1>Creative</h1>
 
     </template>
   </LSection>
@@ -11,7 +11,7 @@
 import LSection from "@/components/layout/LSection.vue";
 
 export default {
-  name: "ChallengesView",
+  name: "CreativeView'",
   components: {LSection}
 }
 </script>
