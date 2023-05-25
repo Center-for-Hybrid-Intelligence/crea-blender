@@ -20,7 +20,7 @@
     </template>
 
     <template #button>
-      <button class="button">
+      <button @click="start" class="button">
         Start
       </button>
     </template>
@@ -33,7 +33,14 @@ import LInfo from "@/components/layout/LInfo.vue";
 
 export default {
   name: "ChallengeInfo",
-  components: {LInfo}
+  components: {LInfo},
+  setup(props, {emit}) {
+    const start = () => {
+      emit("start");    }
+    return {
+      start
+    }
+  }
 }
 </script>
 

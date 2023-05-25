@@ -1,17 +1,18 @@
 <template>
-  <LSection>
-      <template #body>
-
-      </template>
-  </LSection>
+  <div>
+    <div
+        class="w-screen pt-20 px-12"
+    >
+      <slot name="body"></slot>
+    </div>
+  </div>
 </template>
 
 <script>
-import LSection from "@/components/layout/LSection.vue";
 
 export default {
   name: "LChallenge",
-  components: {LSection}
+  components: {}
 }
 </script>
 

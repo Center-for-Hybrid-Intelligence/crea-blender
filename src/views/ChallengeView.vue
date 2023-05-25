@@ -1,18 +1,31 @@
 <template>
-      <ChallengeInfo/>
-  <LSection>
-    <template #body>
-    </template>
-  </LSection>
+      <ChallengeInfo v-if="!challengeStarted" @start="startChallenge"/>
+      <div class="m-auto">
+        <div v-if="challengeStarted" ><TripleImageGame/></div>
+      </div>
+
 </template>
 
 <script>
-import LSection from "@/components/layout/LSection.vue";
 import ChallengeInfo from "@/components/ChallengeInfo.vue";
+import {ref} from "vue";
+import TripleImageGame from "@/components/TripleImageGame.vue";
 
 export default {
   name: "ChallengesView",
-  components: {ChallengeInfo, LSection}
+  components: {TripleImageGame, ChallengeInfo},
+  setup() {
+    const challengeStarted = ref(false);
+    const startChallenge = () => {
+      console.log("start");
+      challengeStarted.value = true;
+    }
+    return {
+      startChallenge,
+      challengeStarted
+
+    }
+  }
 }
 </script>
 
