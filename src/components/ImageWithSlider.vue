@@ -8,25 +8,27 @@
         class=" w-full appearance-none h-4 bg-gray-300 rounded-lg outline-none mt-4"
         @input="updateSliderValue"
     >  </div>
+  {{sliderValue}}
 </template>
 
 <script>
-import {ref} from "vue";
 
 export default {
   name: "ImageWithSlider",
-  setup() {
-    const sliderValue = ref(0);
-
+  props: {
+    sliderValue: {
+      type: Number,
+      required: true,
+    },
+  },
+  setup(props, {emit}) {
     const updateSliderValue = (event) => {
-      sliderValue.value = event.target.value;
+      emit("change", event.target.value);
     };
-
     return {
-      sliderValue,
       updateSliderValue
     };
-  }
+  },
 }
 </script>
 
