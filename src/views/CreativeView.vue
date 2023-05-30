@@ -1,5 +1,4 @@
 <template>
-      <h1>Creative</h1>
   <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
   <CreativeGame  @end="endChallenge" />
   <CreativeDone v-if="challengeIsDone"/>
