@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import {ref} from "vue";
 import CreativeDone from "@/components/CreativeDone.vue";
 import CreativeInfo from "@/components/CreativeInfo.vue";
 import CreativeGame from "@/components/CreativeGame.vue";
+import {ref} from "vue";
 export default {
   name: "CreativeView'",
   components: {CreativeGame, CreativeInfo, CreativeDone},

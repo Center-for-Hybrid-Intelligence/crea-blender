@@ -18,11 +18,11 @@ export default {
   props: {
     value: {
       type: Number,
-      default: 0,
+      default: 50,
     },
     value2: {
       type: Number,
-      default: 0,
+      default: 50,
     },
   },
   setup(props) {

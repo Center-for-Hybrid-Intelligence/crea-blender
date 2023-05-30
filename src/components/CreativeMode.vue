@@ -1,5 +1,5 @@
 <template>
-  <LModeSelection :locked="true" class="w-72">
+  <LModeSelection :locked="false" class="w-72">
     <template #image>
       <img src="../../src/assets/placeholder.png" alt="Placeholder Image">
     </template>

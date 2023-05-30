@@ -4,14 +4,14 @@
     <div class="flex justify-between">
       <img src="../../src/assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
       <div class="flex align-middle justify-center ">
-        <ComparisonValue :sliderValue="20" :value="slider1" :value2="slider2" />
+        <ComparisonValue :value="slider1" :value2="slider2" />
       </div>
       <img src="../../src/assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
     </div>
     <div class="flex justify-between">
       <ImageWithSlider @change="handleSlider1Change"/>
       <ImageWithSlider @change="handleSlider2Change"/>
-    <ImageWithSlider @change="(value) => handleSlider2Change(value)"/>
+    <ImageWithSlider @change="handleSlider3Change"/>
     </div>
     </div>
     <div class=" flex flex-col absolute right-12">
@@ -33,9 +33,8 @@ export default {
 
 
   setup(props, {emit}) {
-  const slider1 = ref(10);
-  const slider2 = ref(9);
-  const slider3 = ref(0);
+  const slider1 = ref(50);
+  const slider2 = ref(50);
 
     const handleSlider1Change = (value) => {
       slider1.value = parseInt(value)
@@ -43,11 +42,6 @@ export default {
     };
     const handleSlider2Change = (value) => {
       slider2.value = parseInt(value)
-      console.log(value)
-    };
-
-    const handleSlider3Change = (value) => {
-      slider3.value = value;
       console.log(value)
     };
 
@@ -62,10 +56,8 @@ export default {
       end,
       slider1,
       slider2,
-      slider3,
       handleSlider1Change,
-      handleSlider2Change,
-      handleSlider3Change
+      handleSlider2Change
     }
   }
 }
