@@ -30,7 +30,7 @@ import LModeSelection from "@/components/layout/LModeSelection.vue";
 
 export default {
   name: "TutorialMode",
-  components: {LModeSelection}
+  components: {LModeSelection},
 }
 </script>
 
