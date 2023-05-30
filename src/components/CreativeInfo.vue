@@ -12,7 +12,7 @@
         <div class="w-1/5 flex align-middle">
           <img src="../assets/bearFeet.png" class="w-12 object-contain" alt="Home">
         </div>
-        <div class="w-4/5">
+        <div class="w-4/5 flex items-center">
           <p>
             Come up with as many original and creative animal-like images as you can. "Creative" animal-like images thet strike as people clever, uncommon, humorous, innovative or different          </p>
         </div>
@@ -22,7 +22,7 @@
         <div class="w-1/5 flex align-middle">
           <img src="../assets/hourglass.png" class="w-12 object-contain" alt="Home">
         </div>
-        <div class="w-4/5">
+        <div class="w-4/5 flex items-center">
           <p>
             You have unlimited time to finish this task
           </p>

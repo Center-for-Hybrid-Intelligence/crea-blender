@@ -1,6 +1,6 @@
 <template>
 
-  <CreativeInfo v-if="challengeStarted" @start="startChallenge"/>
+  <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
   <CreativeGame  @end="endChallenge" />
   <CreativeDone v-if="challengeIsDone"/>
 
