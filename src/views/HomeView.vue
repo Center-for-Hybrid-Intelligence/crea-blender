@@ -1,6 +1,16 @@
 <template>
 
   <UserInfo/>
+  <div class="flex justify-between z-50 absolute top-0 right-0 p-8">
+    <div class="flex gap-4">
+      <img src="../assets/danish.jpg" alt="Home"
+           class="h-8 cursor-pointer  object-contain  hover"
+      />
+      <img src="../assets/english.jpg" alt="Home"
+           class=" h-8 cursor-pointer object-contain hover"
+      />
+    </div>
+  </div>
   <div class="flex pt-20 px-12 justify-evenly">
     <div class="flex flex-col gap-2">
       <TutorialModeChallenges/>
@@ -20,6 +30,7 @@
       <img src="../../src/assets/ScienceAtHome.png" alt="Science at home"
            class="h-16 cursor-pointer object-contain hover">
     </router-link>
+
 
   </div>
 
