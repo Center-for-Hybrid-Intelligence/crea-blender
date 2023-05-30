@@ -2,8 +2,7 @@
   <LInfo>
     <template #title>
       <h1 class="self-center">
-
-      <slot name="title"></slot>
+      Challenge mode
       </h1>
     </template>
     <template #body>
@@ -13,7 +12,7 @@
         </div>
         <div class="w-4/5">
           <p>
-            <slot name="body"></slot>
+          Choose the set of images you think will create the target image. You have 30 seconds.
           </p>
         </div>
 

@@ -21,7 +21,7 @@
     <Button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</Button>
     </div>
 </div>
-  <img @click="toggleGallery" class="absolute top-1/4 left-2/3 cursor-pointer" src="photo-gallery-icon.svg" alt="Open gallery">
+  <img @click="toggleGallery"  class="absolute top-1/4 left-2/3 cursor-pointer hover:animate-wiggle" src="photo-gallery-icon.svg" alt="Open gallery">
 
   <Gallery @close="toggleGallery" :visible="showGallery"/>
 </template>
