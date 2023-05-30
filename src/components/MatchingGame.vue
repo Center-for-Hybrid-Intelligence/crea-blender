@@ -21,29 +21,23 @@
     <Button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</Button>
     </div>
 </div>
-  <img @click="toggleGallery"  class="absolute top-1/4 left-2/3 cursor-pointer hover:animate-wiggle" src="photo-gallery-icon.svg" alt="Open gallery">
 
-  <Gallery @close="toggleGallery" :visible="showGallery"/>
 </template>
 
 <script>
 import ImageWithSlider from "@/components/ImageWithSlider.vue";
 import ComparisonValue from "@/components/ComparisonValue.vue";
 import {ref} from "vue";
-import Gallery from "@/components/Gallery.vue";
 
 export default {
   name: "MatchingGame",
-  components: {Gallery, ComparisonValue, ImageWithSlider},
+  components: { ComparisonValue, ImageWithSlider},
 
 
   setup(props, {emit}) {
   const slider1 = ref(50);
   const slider2 = ref(50);
-  const showGallery = ref(false);
-  const toggleGallery = () => {
-      showGallery.value = !showGallery.value;
-  }
+
     const handleSlider1Change = (value) => {
       slider1.value = parseInt(value)
       console.log(value)
@@ -67,9 +61,7 @@ export default {
       slider1,
       slider2,
       handleSlider1Change,
-      handleSlider2Change,
-      showGallery,
-      toggleGallery
+      handleSlider2Change
     }
   }
 }
