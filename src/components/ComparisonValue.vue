@@ -3,7 +3,7 @@
 <!--THis is not finished but I have to fix the percentage bar-->
   <div class="flex justify-center">{{ calculated.toFixed(2) }}% match</div>
     <div class=" h-4 w-64 relative bg-gray-300">
-      <div :style="{ width: (calculated+'%') }" class="h-4 absolute top-0 left-0 z-50 bg-blue-500"></div>
+      <div :style="{ width: (calculated+'%') }" class="h-4 absolute top-0 left-0 bg-blue-500"></div>
     </div>
   <h1 class="self-center font-extrabold text-7xl">
     =
