@@ -15,15 +15,17 @@ module.exports = {
     },
     extend: {
       animation: {
-        'wiggle': 'wiggle 0.5s ease-in-out infinite',
+        'wiggle': 'wiggle 0.5s ease-in-out',
       },
       colors: {
         neutral: '#e5e7eb',
       },
       keyframes: {
         wiggle: {
-          '0%, 100%': { transform: 'rotate(-3deg)' },
-          '50%': { transform: 'rotate(3deg)' },
+          '0%': { transform: 'rotate(0deg)' },
+          '33%': { transform: 'rotate(-3deg)' },
+          '66%': { transform: 'rotate(3deg)' },
+          '100%': { transform: 'rotate(0deg)' },
         }
 
       },

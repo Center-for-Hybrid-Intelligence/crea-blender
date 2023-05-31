@@ -23,7 +23,7 @@
         <Button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</Button>
       </div>
 </div>
-  <img @click="toggleGallery"  class="absolute top-1/4 left-2/3 cursor-pointer hover:animate-wiggle" src="photo-gallery-icon.svg" alt="Open gallery">
+  <img @click="toggleGallery"  class="absolute top-1/4 right-12 h8:right-24 k15:right-1/4 k1:right-36 cursor-pointer hover:animate-wiggle" src="photo-gallery-icon.svg" alt="Open gallery">
 
   <Gallery @close="toggleGallery" :visible="showGallery"/>
 </template>
@@ -35,7 +35,7 @@ import Gallery from "@/components/Gallery.vue";
 
 export default {
   name: "CreativeGame",
-  components: {ImageWithSlider, Gallery },
+  components: {ImageWithSlider, Gallery},
   setup(props,{emit}){
     const slider1 = ref(50);
     const slider2 = ref(50);
