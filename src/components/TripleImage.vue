@@ -1,8 +1,8 @@
 <template>
-      <div @click="onChange" class="grid mb-8 w-96 grid-cols-3 gap-2 border-4 hover:border-green-600">
-        <img class="w-32" :src="image1 || 'https://placehold.co/400'" alt="">
-        <img class="w-32" :src="image2 || 'https://placehold.co/400'" alt="">
-        <img class="w-32" :src="image3 || 'https://placehold.co/400'" alt="">
+      <div @click="onChoose" class="grid mb-8 w-96 grid-cols-3 gap-2 border-4 hover:border-green-600">
+        <img class="w-32" :src="image1.url" alt="">
+        <img class="w-32" :src="image2.url" alt="">
+        <img class="w-32" :src="image3.url" alt="">
       </div>
 </template>
 
@@ -14,24 +14,33 @@ export default {
   components: {},
   props: {
     image1: {
-      type: String,
-      default: "",
+      type: Object,
+      default: () => ({
+        url: "https://placehold.co/400",
+        id: "image 1 id",
+      }),
     },
     image2: {
-      type: String,
-      default: "",
+      type: Object,
+      default: () => ({
+        url: "https://placehold.co/400",
+        id: "image 2 id",
+      }),
     },
     image3: {
-      type: String,
-      default: "",
+      type: Object,
+      default: () => ({
+        url: "https://placehold.co/400",
+        id: "image 3 id",
+      }),
     },
   },
   setup() {
-    const onChange = () => {
-      console.log("change");
+    const onChoose = (value) => {
+      console.log(value);
     }
     return {
-      onChange
+      onChoose
     }
   }
 }

@@ -20,19 +20,15 @@
 
 import {ref} from "vue";
 
+
 export default {
   name: "ImageWithSlider",
-  props: {
-    sliderValue: {
-      type: Number,
-      required: true,
-    },
-  },
+  emits: ["changeSlider"],
   setup(props, {emit}) {
     const sliderValueLocale = ref(0)
-    const updateSliderValue = (event) => {
-      sliderValueLocale.value = event.target.value;
-      emit("change", event.target.value);
+    const updateSliderValue = (value) => {
+      sliderValueLocale.value = value.target.value;
+      emit("changeSlider", value.target.value);
     };
     return {
       updateSliderValue,

@@ -19,6 +19,7 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Gallery",
+  emits: ['close'],
   props: {
     visible: {
       type: Boolean,

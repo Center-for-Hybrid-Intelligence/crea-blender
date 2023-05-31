@@ -46,6 +46,9 @@ import LInfo from "@/components/layout/LInfo.vue";
 
 export default {
   name: "CreativeInfo",
+  emits: [
+    'start'
+  ],
   components: {LInfo},
   setup(props, {emit}) {
     const start = () => {

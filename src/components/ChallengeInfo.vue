@@ -33,6 +33,9 @@ import LInfo from "@/components/layout/LInfo.vue";
 
 export default {
   name: "ChallengeInfo",
+  emits: [
+    'start'
+  ],
   components: {LInfo},
   setup(props, {emit}) {
     const start = () => {

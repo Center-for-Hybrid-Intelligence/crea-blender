@@ -5,8 +5,8 @@
           </div>
           <div class="flex justify-evenly h- flex-col">
             <BigImage/>
-            <Button @click="changeGame('MatchingGame')" class="button self-center mt-8">Continue</Button>
-            <Button @click="end" class="buttonSecondary m-auto mt-4 ">Skip</Button>
+            <button @click="changeGame('MatchingGame')" class="button self-center mt-8">Continue</button>
+            <button @click="end" class="buttonSecondary m-auto mt-4 ">Skip</button>
           </div>
 
         </div>
@@ -19,7 +19,10 @@ import BigImage from "@/components/BigImage.vue";
 export default {
   name: "TripleImageGame",
   components: {BigImage, TripleImage},
-
+  emits: [
+    'navigateToGame',
+    'end'
+  ],
 
   setup(props,{emit}) {
     const challengeStarted = ref(false);

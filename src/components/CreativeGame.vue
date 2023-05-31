@@ -20,10 +20,10 @@
         </div>
       </div>
       <div class=" flex flex-col absolute right-12">
-        <Button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</Button>
+        <button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</button>
       </div>
 </div>
-  <img @click="toggleGallery"  class="absolute top-1/4 right-12 h8:right-24 k15:right-1/4 k1:right-36 cursor-pointer hover:animate-wiggle" src="photo-gallery-icon.svg" alt="Open gallery">
+  <img @click="toggleGallery"  class="absolute top-1/4 right-12 h8:right-24 k15:right-1/4 k1:right-36 cursor-pointer transition-all hover:animate-wiggle" src="photo-gallery-icon.svg" alt="Open gallery">
 
   <Gallery @close="toggleGallery" :visible="showGallery"/>
 </template>
@@ -35,6 +35,9 @@ import Gallery from "@/components/Gallery.vue";
 
 export default {
   name: "CreativeGame",
+  emits: [
+    'end'
+  ],
   components: {ImageWithSlider, Gallery},
   setup(props,{emit}){
     const slider1 = ref(50);

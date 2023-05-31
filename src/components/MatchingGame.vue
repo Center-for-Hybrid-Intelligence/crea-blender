@@ -10,15 +10,15 @@
       <img src="../../src/assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
     </div>
     <div class="flex justify-between">
-      <ImageWithSlider @change="handleSlider1Change"/>
-      <ImageWithSlider @change="handleSlider2Change"/>
+      <ImageWithSlider @changeSlider="value => handleSlider(value, 'slider1')"/>
+      <ImageWithSlider @changeSlider="value => handleSlider(value, 'slider2')"/>
     <ImageWithSlider/>
     </div>
     </div>
 
     <div class=" flex flex-col absolute right-12">
-    <Button @click="changeGame('TripleImageGame')" class="button self-center mt-8">Continue</Button>
-    <Button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</Button>
+    <button @click="changeGame('TripleImageGame')" class="button self-center mt-8">Continue</button>
+    <button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</button>
     </div>
 </div>
 
@@ -31,6 +31,10 @@ import {ref} from "vue";
 
 export default {
   name: "MatchingGame",
+  emits: [
+    'navigateToGame',
+    'end'
+  ],
   components: { ComparisonValue, ImageWithSlider},
 
 
@@ -38,14 +42,14 @@ export default {
   const slider1 = ref(50);
   const slider2 = ref(50);
 
-    const handleSlider1Change = (value) => {
-      slider1.value = parseInt(value)
-      console.log(value)
+    const handleSlider = (value, slider) => {
+      if (slider === "slider1") {
+        slider1.value = parseInt(value);
+      } else {
+        slider2.value = parseInt(value);
+      }
     };
-    const handleSlider2Change = (value) => {
-      slider2.value = parseInt(value)
-      console.log(value)
-    };
+
 
     const changeGame = (game) => {
       emit('navigateToGame', game);
@@ -60,8 +64,7 @@ export default {
       end,
       slider1,
       slider2,
-      handleSlider1Change,
-      handleSlider2Change
+      handleSlider
     }
   }
 }
