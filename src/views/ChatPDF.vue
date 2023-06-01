@@ -144,7 +144,7 @@ export default {
       handleDragEnter,
       handleDragOver,
       handleDragLeave,
-      handleDrop
+      handleDrop 
     }
   }
 }
