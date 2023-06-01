@@ -95,17 +95,18 @@
       </div>
     </transition-group>
 
-    <div class="flex justify-center gap-6 m-6" v-if="files.length > 0">
-      <button @click="onsubmit()"
-              class="p-4 px-8 text-2xl font-bold bg-green-500 self-center rounded-xl text-white hover:bg-green-600 transition-all duration-300">
-        Submit
-      </button>
+    <div class="flex justify-center m-12" v-if="files.length > 0">
       <input
           v-model="inputFieldValue"
           type="text"
-          placeholder="Enter ID"
+          placeholder="Enter Namespace"
           class="px-2 py-1 border border-gray-400 rounded-l focus:outline-none"
       />
+      <button @click="onsubmit()" :disabled="inputFieldValue === ''"
+              :class="{ 'bg-green-200 text-grey': inputFieldValue === '' }"
+              class="p-2 px-6 text-xl font-bold bg-green-500 self-center rounded-r-lg text-white transition-all duration-300">
+        Submit
+      </button>
 
     </div>
   </div>
@@ -188,10 +189,9 @@ export default {
 
 
     const onsubmit = () => {
-      // Handle form submission with inputFieldValue and files.value
+      const fileObject = { [inputFieldValue.value]: files.value };
 
-      console.log("Input Field Value:", inputFieldValue.value);
-      console.log("Uploaded Files:", files.value);
+      console.log("File Object:", fileObject);
     };
     const deleteFile = (index) => {
       files.value.splice(index, 1);
