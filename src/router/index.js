@@ -26,6 +26,11 @@ const routes = [
     path: '/creative',
     name: 'creative',
     component: () => import('../views/CreativeView.vue')
+  },
+  {
+    path: '/chatPDF',
+    name: 'chatPDF',
+    component: () => import('../views/ChatPDF.vue')
   }
 ]
 

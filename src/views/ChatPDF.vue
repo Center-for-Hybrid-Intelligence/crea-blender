@@ -1,7 +1,7 @@
 <template>
 <!--select or drop single or multiple files form using tailwindcss and compositionAPI-->
-  <div class="flex flex-col w-full">
-    <div class="w-full">
+  <div class="flex items-center justify-center h-screen w-screen">
+    <div class=" justify-center">
       <label class="block text-sm font-medium text-gray-700" for="files">
         Select files
       </label>

@@ -42,6 +42,10 @@ export default {
   const slider1 = ref(50);
   const slider2 = ref(50);
 
+    const handleSlider2 = (value) => {
+      console.log(value)
+    };
+
     const handleSlider = (value, slider) => {
       if (slider === "slider1") {
         slider1.value = parseInt(value);
@@ -64,6 +68,7 @@ export default {
       end,
       slider1,
       slider2,
+      handleSlider2,
       handleSlider
     }
   }
