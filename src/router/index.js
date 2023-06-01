@@ -26,16 +26,6 @@ const routes = [
     path: '/creative',
     name: 'creative',
     component: () => import('../views/CreativeView.vue')
-  },
-  {
-    path: '/chatPDF',
-    name: 'chatPDF',
-    component: () => import('../views/ChatPDF.vue')
-  },
-  {
-    path: '/promptPDF',
-    name: 'promptPDF',
-    component: () => import('../views/PromptPDF.vue')
   }
 ]
 
