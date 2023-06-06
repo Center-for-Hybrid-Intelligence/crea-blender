@@ -15,7 +15,7 @@
       </div>
     </template>
     <template #button>
-      <router-link to="/creative">
+      <router-link to="blender/creative">
         <div class="bg-green-500 w-full h-12 rounded-b-lg flex justify-center items-center cursor-pointer text-white ">
           Start
         </div>
