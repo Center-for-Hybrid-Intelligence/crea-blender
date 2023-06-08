@@ -1,28 +1,40 @@
 <template>
-<!--  <div class="grid gap-1 grid-container">-->
-<!--    <Tile-->
-<!--        v-for="(tile, index) in grid"-->
-<!--        :key="index"-->
-<!--        class="draggable"-->
-<!--        :isOn="tile.filled"-->
-<!--        :isMovable="true"-->
-<!--        :location="[Math.floor(index/16), index%16] "-->
-<!--        ref="tiles"-->
-<!--        draggable="true"-->
-<!--        @dragover.prevent-->
-<!--        @dragenter.prevent-->
-<!--    ></Tile>-->
-<!--  </div>-->
+
   <div class="h-screen w-screen">
+<!--    <div class="grid gap-1 grid-container">-->
+<!--      <Tile-->
+<!--          v-for="(tile, index) in grid"-->
+<!--          :key="index"-->
+<!--          class="draggable"-->
+<!--          :isOn="tile.filled"-->
+<!--          :isMovable="true"-->
+<!--          :location="[Math.floor(index/16), index%16] "-->
+<!--          ref="tiles"-->
+<!--          draggable="true"-->
+<!--          @dragover.prevent-->
+<!--          @dragenter.prevent-->
+<!--      ></Tile>-->
+<!--    </div>-->
     <div class="grid gap-1 grid-container">
-    <draggable v-model="grid">
-      <template v-slot:item="{item}" >
-        <div>
-         {{item}}
-        </div>
-        <!-- or your own template -->
-      </template>
-    </draggable>
+      <div v-for="row in rows" :key="row">
+        <vue-draggable v-model="grid">
+          <template v-slot:item="{item}">
+            <Tile :isOn="item.filled"
+                  :key="item"
+                  class="draggable"
+                  :isMovable="true"
+                  :location="[Math.floor(row), grid.index] "
+                  ref="tiles"
+                  draggable="true"
+                  @dragover.prevent
+                  @dragenter.prevent
+            ></Tile>
+
+          </template>
+        </vue-draggable>
+
+      </div>
+
     </div>
 <!--    <div class="absolute bg-red-500 p-4 hidden rounded-md" :style="{ top: elementTop, left: elementLeft, 'display: block': isMoving }"-->
 <!--    ></div>-->
@@ -31,14 +43,15 @@
 
 <script>
 import {ref, onMounted, onUnmounted, computed} from 'vue';
-// import Tile from "@/components/Tile.vue";
-import Draggable from "vue3-draggable";
+import Tile from "@/components/Tile.vue";
+import VueDraggable from "vue3-draggable";
 
 export default {
   name: "TilesArray",
-  components: {Draggable},
+  components: {VueDraggable, Tile},
   setup() {
-    const grid = ref(createGrid(16, 12));
+    const grid = ref(createGrid(16, 2));
+    const rows = ref(16);
 
     const mouseX = ref(0); // Current mouse X position
     const mouseY = ref(0); // Current mouse Y position
@@ -49,7 +62,7 @@ export default {
 
 
     function createGrid(size, filledCount) {
-      return Array.from({length: size * size}, (_, index) => ({
+      return Array.from({length: size}, (_, index) => ({
         filled: index < filledCount,
       }));
     }
@@ -70,7 +83,7 @@ export default {
       document.removeEventListener('mousemove', updateMousePosition);
     });
 
-    return {mouseX, mouseY, elementTop, elementLeft, grid };
+    return {mouseX, mouseY, elementTop, elementLeft, grid, rows };
   },
 }
 </script>
