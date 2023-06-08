@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import TilesHomeView from '@/views/Tiles/TilesHomeView.vue'
 import TilesChallengeView from "@/views/Tiles/TilesChallengeView.vue";
 import TilesCreativeDigitsView from "@/views/Tiles/TilesCreativeDigitsView.vue";
-import TilesCreativeDogsView from "@/views/Tiles/TilesCreativeDogsView.vue";
+// import TilesCreativeDogsView from "@/views/Tiles/TilesCreativeDogsView.vue";
 
 
 const routes = [
@@ -36,7 +36,7 @@ const routes = [
     {
         path: '/tiles/creative/dogs',
         name: 'tilesCreativeDogs',
-        component: TilesCreativeDogsView,
+        component: TilesCreativeDigitsView,
     },
     {
         path: '/blender/challenges',
