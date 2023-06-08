@@ -1,19 +1,22 @@
 <template>
-
   <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
   <CreativeGame  @end="endChallenge" />
   <CreativeDone v-if="challengeIsDone"/>
-
 </template>
 
 <script>
-import CreativeDone from "@/components/CreativeDone.vue";
-import CreativeInfo from "@/components/CreativeInfo.vue";
-import CreativeGame from "@/components/CreativeGame.vue";
+// @ is an alias to /src
+import CreativeGame from "@/components/Tiles/Creative/TilesCreativeGameDigits.vue";
+import CreativeInfo from "@/components/Tiles/Creative/TilesCreativeInfoDigits.vue";
+import CreativeDone from "@/components/Tiles/Creative/TilesCreativeDone.vue";
 import {ref} from "vue";
 export default {
-  name: "CreativeView'",
-  components: {CreativeGame, CreativeInfo, CreativeDone},
+  name: 'TilesCreativeView',
+  components: {
+    CreativeDone,
+    CreativeInfo,
+    CreativeGame,
+  },
   setup() {
     const challengeStarted = ref(false);
     const challengeIsDone = ref(false);
@@ -36,7 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

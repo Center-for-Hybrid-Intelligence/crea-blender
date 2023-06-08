@@ -4,9 +4,9 @@
         <div class="flex justify-center ">
           <div class="flex relative group">
 
-          <img src="../../src/assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-80 h-60 group-hover:border-8 border-8 border-transparent group-hover:transition-all group-hover:duration-200 group-hover:border-black border-grey border-dashed cursor-pointer">
+          <img src="../../../assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-80 h-60 group-hover:border-8 border-8 border-transparent group-hover:transition-all group-hover:duration-200 group-hover:border-black border-grey border-dashed cursor-pointer">
             <div class="absolute -bottom-10 -right-10 w-20 h-20 group-hover:-bottom-12 group-hover:-right-12 group-hover:w-24 group-hover:h-24 bg-white rounded-lg p-4 shadow-2xl shadow-zinc-950 group-hover:p-3 transition-all group-hover:transition-all group-hover:duration-200 cursor-pointer">
-              <img src="../../src/assets/camera.png" alt="Camera" class="object-contain">
+              <img src="../../../assets/camera.png" alt="Camera" class="object-contain">
 
             </div>
           </div>

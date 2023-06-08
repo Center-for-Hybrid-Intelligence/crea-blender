@@ -1,18 +1,18 @@
 <template>
-  <LModeSelection class="w-72">
+  <LModeSelection :locked="false" class="w-72">
     <template #image>
-      <img src="../../src/assets/placeholder.png" alt="Placeholder Image">
+      <img src="../../../assets/placeholder.png" alt="Placeholder Image">
     </template>
     <template #title>
-        Challenges
+      Creative
     </template>
     <template #body>
-        Complete task in 60sec
+      Create your own animals
     </template>
     <template #button>
-      <router-link to="blender/challenges" >
+      <router-link to="blender/creative" >
         <div class="bg-green-500 w-full h-12 rounded-b-lg flex justify-center items-center cursor-pointer text-white ">
-        Start
+          Start
         </div>
       </router-link>
     </template>
@@ -24,7 +24,7 @@
 import LModeSelection from "@/components/layout/LModeSelection.vue";
 
 export default {
-  name: "ChallengeMode",
+  name: "CreativeMode",
   components: {LModeSelection}
 }
 </script>
