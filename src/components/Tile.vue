@@ -1,8 +1,10 @@
 <template>
-<div class="w-full h-full " :class="{'bg-blue-700': isOn}" ></div>
+<div class="w-full h-full border" @mousedown="mouseDown" @mouseup="mouseUp" :class="{'bg-blue-700': isOn, 'draggable': isOn && isMovable && !isDragged}" >{{location}}</div>
+
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Tile",
@@ -16,28 +18,30 @@ export default {
     isDroppable: {
       type: Boolean,
     },
-    draggableLocation: {
-      type: Array,
-    },
-    droppableLocation: {
+    location: {
       type: Array,
     },
   },
-  setup(props, {emit}) {
+  setup(props, { emit }) {
+    const isDragged = ref(false);
     const mouseDown = () => {
-      if (props.isMovable) {
+      if (props.isMovable && props.isOn) {
         // Moving logic
-        emit("move");
+        isDragged.value = true;
+        console.log("dragging", props.location)
       }
     }
-    // const mouseUp = () => {
-    //   if (props.isDroppable) {
-    //     // Dropping logic
-    //     emit("drop", props.droppableLocation);
-    //   }
-    // }
+    const mouseUp = () => {
+      if (props.isDroppable) {
+        // Dropping logic
+        emit("drop", props.location);
+      }
+      isDragged.value = false;
+    }
     return {
-      mouseDown
+      mouseDown,
+      isDragged,
+      mouseUp
     }
   }
 }

@@ -1,96 +1,51 @@
 <template>
-  <div class="grid-container">
-    <div
-        v-for="(tile, index) in grid"
-        :key="index"
-        :class="['tile', { 'filled': tile.filled }]"
-        ref="tiles"
-        draggable="true"
-        @dragstart="dragStart(index)"
-        @dragover.prevent
-        @dragenter.prevent
-        @drop="drop(index)"
-    ></div>
-  </div>
+<!--  <div class="grid gap-1 grid-container">-->
+<!--    <Tile-->
+<!--        v-for="(tile, index) in grid"-->
+<!--        :key="index"-->
+<!--        class="draggable"-->
+<!--        :isOn="tile.filled"-->
+<!--        :isMovable="true"-->
+<!--        :location="[Math.floor(index/16), index%16] "-->
+<!--        ref="tiles"-->
+<!--        draggable="true"-->
+<!--        @dragover.prevent-->
+<!--        @dragenter.prevent-->
+<!--    ></Tile>-->
+<!--  </div>-->
   <div class="h-screen w-screen">
-
-<!--    <div class="absolute bg-red-500 p-4 rounded-md" :style="{ top: elementTop, left: elementLeft }"-->
+    <div class="grid gap-1 grid-container">
+    <draggable v-model="grid">
+      <template v-slot:item="{item}" >
+        <div>
+         {{item}}
+        </div>
+        <!-- or your own template -->
+      </template>
+    </draggable>
+    </div>
+<!--    <div class="absolute bg-red-500 p-4 hidden rounded-md" :style="{ top: elementTop, left: elementLeft, 'display: block': isMoving }"-->
 <!--    ></div>-->
   </div>
 </template>
 
 <script>
 import {ref, onMounted, onUnmounted, computed} from 'vue';
+// import Tile from "@/components/Tile.vue";
+import Draggable from "vue3-draggable";
 
 export default {
   name: "TilesArray",
-  components: {},
+  components: {Draggable},
   setup() {
     const grid = ref(createGrid(16, 12));
 
-    const array = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]); // Array of tiles
     const mouseX = ref(0); // Current mouse X position
     const mouseY = ref(0); // Current mouse Y position
 
     const elementTop = computed(() => mouseY.value + "px"); // Set the top position based on the mouse Y position
     const elementLeft = computed(() => mouseX.value + "px"); // Set the left position based on the mouse X position
 
-    const tiles = ref([]);
-    let draggedTileIndex = null;
-
-    onMounted(() => {
-      tiles.value = Array.from(document.querySelectorAll(".tile"));
-    });
-
-    function dragStart(index) {
-      draggedTileIndex = index;
-    }
-
-    function drop(index) {
-      if (!tiles.value[index].classList.contains("filled") && isValidMove(draggedTileIndex, index)) {
-        grid.value[draggedTileIndex].filled = false;
-        grid.value[index].filled = true;
-      }
-      draggedTileIndex = null;
-    }
-
-    function isValidMove(from, to) {
-      const isAdjacent = isAdjacentIndex(from, to);
-      const willConnectToChain = isConnected(to);
-
-      return !isAdjacent && willConnectToChain;
-    }
-
-    function isAdjacentIndex(index1, index2) {
-      const colDiff = Math.abs((index1 % 16) - (index2 % 16));
-      const rowDiff = Math.abs(Math.floor(index1 / 16) - Math.floor(index2 / 16));
-
-      return (rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1);
-    }
-
-    function isConnected(index) {
-      const neighbors = [
-        { rowOffset: -1, colOffset: 0 },
-        { rowOffset: 1, colOffset: 0 },
-        { rowOffset: 0, colOffset: -1 },
-        { rowOffset: 0, colOffset: 1 },
-      ];
-
-      const row = Math.floor(index / 16);
-      const col = index % 16;
-
-      return neighbors.some(({ rowOffset, colOffset }) => {
-        const newRow = row + rowOffset;
-        const newCol = col + colOffset;
-        const newIndex = newRow * 16 + newCol;
-
-        if (newRow >= 0 && newRow < 16 && newCol >= 0 && newCol < 16) {
-          return grid.value[newIndex].filled;
-        }
-
-        return false;
-      });
-    }
 
 
     function createGrid(size, filledCount) {
@@ -103,7 +58,6 @@ export default {
       // Update the mouse position based on the event coordinates
       mouseX.value = event.pageX;
       mouseY.value = event.pageY;
-      console.log(elementLeft, elementTop)
     };
 
     onMounted(() => {
@@ -116,7 +70,7 @@ export default {
       document.removeEventListener('mousemove', updateMousePosition);
     });
 
-    return {mouseX, mouseY, elementTop, elementLeft, array, grid, dragStart, drop };
+    return {mouseX, mouseY, elementTop, elementLeft, grid };
   },
 }
 </script>
@@ -126,14 +80,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(16, 50px);
   grid-template-rows: repeat(16, 50px);
-  gap: 1px;
-}
-
-.tile {
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
-  background-color: white;
+  gap: 2px;
 }
 
 .filled {
