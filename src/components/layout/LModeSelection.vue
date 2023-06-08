@@ -7,11 +7,11 @@
       <slot name="image"></slot>
     </div>
 
-    <div class="border-x-2 p-4">
+    <div class="border-x-2 p-4 bg-white">
       <div class="font-extrabold text-2xl">
         <slot name="title" class=""></slot>
       </div>
-        <div class="text-md">
+        <div class="text-md ">
       <slot name="body"></slot>
         </div>
     </div>

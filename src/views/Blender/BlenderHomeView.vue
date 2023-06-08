@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-screen w-screen justify-center items-center gap-12">
-    <h1 class="font-extrabold text-5xl ">
+    <h1 class="font-extrabold text-5xl text-white ">
       Crea. Blender
     </h1>
   <div class="flex w-screen justify-evenly">
