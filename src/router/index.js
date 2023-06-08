@@ -1,7 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import BlenderHomeView from '../views/BlenderHomeView.vue'
+import BlenderHomeView from '../views/Blender/BlenderHomeView.vue'
 import HomeView from '../views/HomeView.vue'
-import TilesHomeView from '../views/TilesHomeView.vue'
+import TilesHomeView from '@/views/Tiles/TilesHomeView.vue'
+import TilesChallengeView from "@/views/Tiles/TilesChallengeView.vue";
+import TilesCreativeDigitsView from "@/views/Tiles/TilesCreativeDigitsView.vue";
+import TilesCreativeDogsView from "@/views/Tiles/TilesCreativeDogsView.vue";
 
 
 const routes = [
@@ -21,14 +24,29 @@ const routes = [
         component: TilesHomeView,
     },
     {
+        path: '/tiles/challenges',
+        name: 'tilesChallenges',
+        component: TilesChallengeView,
+    },
+    {
+        path: '/tiles/creative/digits',
+        name: 'tilesCreativeDigits',
+        component: TilesCreativeDigitsView,
+    },
+    {
+        path: '/tiles/creative/dogs',
+        name: 'tilesCreativeDogs',
+        component: TilesCreativeDogsView,
+    },
+    {
         path: '/blender/challenges',
         name: 'blenderChallenges',
-        component: () => import('../views/ChallengeView.vue')
+        component: () => import('../views/Blender/BlenderChallengeView.vue')
     },
     {
         path: '/blender/creative',
         name: 'blenderCreative',
-        component: () => import('../views/CreativeView.vue')
+        component: () => import('../views/Blender/BlenderCreativeView.vue')
     },
     {
         path: '/about',

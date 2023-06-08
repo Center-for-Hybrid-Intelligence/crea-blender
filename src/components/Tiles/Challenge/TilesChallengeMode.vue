@@ -1,23 +1,18 @@
 <template>
-  <LModeSelection class="w-60 self-center">
+  <LModeSelection class="w-72">
     <template #image>
-      <img src="../../src/assets/tutorial.jpg" alt="Placeholder Image " class="rounded-t-lg">
+      <img src="../../../assets/placeholder.png" alt="Placeholder Image">
     </template>
     <template #title>
-      <div class="text-lg">
-        Tutorial
-      </div>
+        Challenges
     </template>
     <template #body>
-      <div class="text-xs">
-        Understand the basis of the game
-
-      </div>
+        Complete task in 60sec
     </template>
     <template #button>
-      <router-link to="blender/creative">
+      <router-link to="tiles/challenges" >
         <div class="bg-green-500 w-full h-12 rounded-b-lg flex justify-center items-center cursor-pointer text-white ">
-          Start
+        Start
         </div>
       </router-link>
     </template>
@@ -27,10 +22,10 @@
 
 <script>
 import LModeSelection from "@/components/layout/LModeSelection.vue";
-export default {
-  name: "TutorialModeCreative",
-  components: {LModeSelection},
 
+export default {
+  name: "ChallengeMode",
+  components: {LModeSelection}
 }
 </script>
 
