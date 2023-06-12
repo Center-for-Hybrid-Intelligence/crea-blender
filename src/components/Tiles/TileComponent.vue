@@ -71,8 +71,9 @@ export default {
 
 <style scoped>
 .tile {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
+  border: #3182ce solid 1px;
 }
 
 .filled {

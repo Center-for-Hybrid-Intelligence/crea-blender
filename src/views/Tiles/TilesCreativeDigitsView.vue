@@ -1,6 +1,6 @@
 <template>
-  <div class="flex h-screen content-center justify-center object-center items-center">
-  <div className="grid-container" >
+  <div class="w-screen h-screen">
+  <div ref="gridContainer" class="grid-container relative overflow-hidden overflow-y-hidden" >
     <tile
         v-for="(tile, index) in grid"
         :key="index"
@@ -13,13 +13,12 @@
         :on-drag-end="dragEnd"
         :style="''"
     />
-  </div>
     <div class="center-marker" ref="centerMarker"></div>
 
-    <!--    Above add computed style to make grid resizable-->
   </div>
-</template>
+  </div>
 
+</template>
 <script>
 import Tile from "@/components/Tiles/TileComponent.vue";
 import {ref} from "vue";
@@ -30,10 +29,13 @@ export default {
     Tile,
   },
   setup() {
-    const gridSize = 16;
-    const grid = ref(createGrid(gridSize, 12));
+    const gridSize = 32;
+    const filledCount = 15;
+    const grid = ref(createGrid(gridSize, filledCount));
     let draggedTileIndex = null;
     const tiles = ref([]);
+
+    const gridContainer = ref(null);
 
     const centerMarker = ref(null);
 
@@ -54,7 +56,7 @@ export default {
       let spawnedTiles = 1;
       while (spawnedTiles < filledCount) {
         const currentIndex = grid.findIndex((tile) => tile.filled);
-
+        // console.log(currentIndex)
         // Generate a random direction to spawn the next tile
         const directions = [
           { rowOffset: -1, colOffset: 0 },
@@ -68,6 +70,7 @@ export default {
         const newCol = (currentIndex % size) + randomDirection.colOffset;
 
         // Check if the new position is inside the grid and not filled
+        console.log(newRow, newCol)
         if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size && !grid[newRow * size + newCol].filled) {
           grid[newRow * size + newCol].filled = true;
           spawnedTiles++;
@@ -121,16 +124,16 @@ export default {
       simulatedGrid[from].filled = false;
       simulatedGrid[to].filled = true;
 
-      const startRow = Math.floor(to / 16);
+      const startRow = Math.floor(to / gridSize);
       const startCol = to % gridSize;
       const visited = Array.from({ length: gridSize }, () => Array(gridSize).fill(false));
 
       const filledTileCount = floodFill(simulatedGrid, startRow, startCol, visited);
 
-      return filledTileCount === 12;
+      return filledTileCount === filledCount;
     }
     function isAdjacentIndex(index1, index2) {
-      const colDiff = Math.abs((index1 % 16) - (index2 % gridSize));
+      const colDiff = Math.abs((index1 % gridSize) - (index2 % gridSize));
       const rowDiff = Math.abs(Math.floor(index1 / gridSize) - Math.floor(index2 / gridSize));
 
       return (rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1);
@@ -183,7 +186,8 @@ export default {
       return count;
     }
 
-    function dragEnter(index) {
+
+      function dragEnter(index) {
       if (index !== draggedTileIndex && !tiles.value[index].classList.contains("filled")
           && isValidMove(draggedTileIndex, index)) {
         tiles.value[index].classList.add("preview");
@@ -200,14 +204,22 @@ export default {
       const chainCenter = findChainCenter();
 
       const markerSize = 10; // Adjust the size of the marker as needed
-      const tileSize = 50;
+      const tileSize = 100;
       const tileGap = 5;
+      const centerOfScreenX = window.innerWidth / 2;
+      const centerOfScreenY = window.innerHeight / 2;
 
       const leftPosition = chainCenter.x * (tileSize + tileGap) + tileSize / 2 - markerSize / 2;
       const topPosition = chainCenter.y * (tileSize + tileGap) + tileSize / 2 - markerSize / 2;
 
+      const gridOffsetX = centerOfScreenX - leftPosition - markerSize / 2;
+      const gridOffsetY = centerOfScreenY - topPosition - markerSize / 2;
+
       centerMarker.value.style.left = `${leftPosition}px`;
       centerMarker.value.style.top = `${topPosition}px`;
+
+      gridContainer.value.style.left = `${gridOffsetX}px`;
+      gridContainer.value.style.top = `${gridOffsetY}px`;
     }
 
 
@@ -225,7 +237,9 @@ export default {
       dragLeave,
       updateCenterMarker,
       findChainCenter,
-      centerMarker
+      centerMarker,
+      gridContainer,
+      filledCount
     };
   },
 };
@@ -235,9 +249,11 @@ export default {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(16, 50px);
-  grid-template-rows: repeat(16, 50px);
+  grid-template-columns: repeat(32, 100px);
+  grid-template-rows: repeat(32, 100px);
   gap: 5px;
+  transition: left 0.5s , top 0.5s ;
+
 }
 .center-marker {
   position: absolute;
