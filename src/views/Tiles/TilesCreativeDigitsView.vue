@@ -1,38 +1,80 @@
 <template>
-  <div class="grid-container">
-    <div
+  <div class="flex h-screen content-center justify-center object-center items-center">
+  <div className="grid-container" >
+    <tile
         v-for="(tile, index) in grid"
         :key="index"
-        :class="['tile', { 'filled': tile.filled }]"
-        ref="tiles"
-        draggable="true"
-        @dragstart="dragStart(index)"
-        @dragover.prevent
-        @dragenter="dragEnter(index)"
-        @dragleave="dragLeave(index)"
-        @drop="drop(index)"
-    ></div>
+        :filled="tile.filled"
+        :index="index"
+        :on-drag-start="dragStart"
+        :on-drop="drop"
+        :on-drag-enter="dragEnter"
+        :on-drag-leave="dragLeave"
+        :on-drag-end="dragEnd"
+        :style="''"
+    />
+  </div>
+    <div class="center-marker" ref="centerMarker"></div>
+
+    <!--    Above add computed style to make grid resizable-->
   </div>
 </template>
 
-
 <script>
-import { ref, onMounted } from "vue";
+import Tile from "@/components/Tiles/TileComponent.vue";
+import {ref} from "vue";
+import {onMounted} from "vue";
 
 export default {
+  components: {
+    Tile,
+  },
   setup() {
-    const grid = ref(createGrid(16, 12));
-    const tiles = ref([]);
+    const gridSize = 16;
+    const grid = ref(createGrid(gridSize, 12));
     let draggedTileIndex = null;
+    const tiles = ref([]);
+
+    const centerMarker = ref(null);
 
     onMounted(() => {
       tiles.value = Array.from(document.querySelectorAll(".tile"));
+      updateCenterMarker(); // Set the initial position of the center marker
     });
-
     function createGrid(size, filledCount) {
-      return Array.from({ length: size * size }, (_, index) => ({
-        filled: index < filledCount,
-      }));
+      const grid = Array.from({ length: size * size }, () => ({ filled: false }));
+
+      const centerRow = Math.floor(size / 2);
+      const centerCol = Math.floor(size / 2);
+      const centerIndex = centerRow * size + centerCol;
+
+      // Spawn the initial tile in the center
+      grid[centerIndex].filled = true;
+
+      let spawnedTiles = 1;
+      while (spawnedTiles < filledCount) {
+        const currentIndex = grid.findIndex((tile) => tile.filled);
+
+        // Generate a random direction to spawn the next tile
+        const directions = [
+          { rowOffset: -1, colOffset: 0 },
+          { rowOffset: 1, colOffset: 0 },
+          { rowOffset: 0, colOffset: -1 },
+          { rowOffset: 0, colOffset: 1 },
+        ];
+        const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+
+        const newRow = Math.floor(currentIndex / size) + randomDirection.rowOffset;
+        const newCol = (currentIndex % size) + randomDirection.colOffset;
+
+        // Check if the new position is inside the grid and not filled
+        if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size && !grid[newRow * size + newCol].filled) {
+          grid[newRow * size + newCol].filled = true;
+          spawnedTiles++;
+        }
+      }
+
+      return grid;
     }
 
     function dragStart(index) {
@@ -45,26 +87,51 @@ export default {
       if (!tiles.value[index].classList.contains("filled") && isValidMove(draggedTileIndex, index)) {
         grid.value[draggedTileIndex].filled = false;
         grid.value[index].filled = true;
+
+        updateCenterMarker(); // Update the position of the center marker
       }
       draggedTileIndex = null;
     }
 
+
+
+    function findChainCenter() {
+      let sumX = 0;
+      let sumY = 0;
+      let filledTiles = 0;
+
+      grid.value.forEach((tile, index) => {
+        if (tile.filled) {
+          sumY += Math.floor(index / gridSize);
+          sumX += index % gridSize;
+          filledTiles++;
+        }
+      });
+
+      const centerX = (filledTiles > 0) ? sumX / filledTiles : 0;
+      const centerY = (filledTiles > 0) ? sumY / filledTiles : 0;
+
+      return {
+        x: centerX,
+        y: centerY,
+      };
+    }
     function isValidMove(from, to) {
       const simulatedGrid = JSON.parse(JSON.stringify(grid.value));
       simulatedGrid[from].filled = false;
       simulatedGrid[to].filled = true;
 
       const startRow = Math.floor(to / 16);
-      const startCol = to % 16;
-      const visited = Array.from({ length: 16 }, () => Array(16).fill(false));
+      const startCol = to % gridSize;
+      const visited = Array.from({ length: gridSize }, () => Array(gridSize).fill(false));
 
       const filledTileCount = floodFill(simulatedGrid, startRow, startCol, visited);
 
       return filledTileCount === 12;
     }
     function isAdjacentIndex(index1, index2) {
-      const colDiff = Math.abs((index1 % 16) - (index2 % 16));
-      const rowDiff = Math.abs(Math.floor(index1 / 16) - Math.floor(index2 / 16));
+      const colDiff = Math.abs((index1 % 16) - (index2 % gridSize));
+      const rowDiff = Math.abs(Math.floor(index1 / gridSize) - Math.floor(index2 / gridSize));
 
       return (rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1);
     }
@@ -77,15 +144,15 @@ export default {
         { rowOffset: 0, colOffset: 1 },
       ];
 
-      const row = Math.floor(index / 16);
-      const col = index % 16;
+      const row = Math.floor(index / gridSize);
+      const col = index % gridSize;
 
       return neighbors.some(({ rowOffset, colOffset }) => {
         const newRow = row + rowOffset;
         const newCol = col + colOffset;
-        const newIndex = newRow * 16 + newCol;
+        const newIndex = newRow * gridSize + newCol;
 
-        if (newRow >= 0 && newRow < 16 && newCol >= 0 && newCol < 16) {
+        if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
           return grid.value[newIndex].filled;
         }
 
@@ -96,11 +163,11 @@ export default {
     function floodFill(grid, row, col, visited) {
       if (
           row < 0 ||
-          row >= 16 ||
+          row >= gridSize ||
           col < 0 ||
-          col >= 16 ||
+          col >= gridSize ||
           visited[row][col] ||
-          !grid[row * 16 + col].filled
+          !grid[row * gridSize + col].filled
       ) {
         return 0;
       }
@@ -126,35 +193,58 @@ export default {
     function dragLeave(index) {
       tiles.value[index].classList.remove("preview");
     }
+    function dragEnd(index) {
+      tiles.value[index].classList.remove("hide");
+    }
+    function updateCenterMarker() {
+      const chainCenter = findChainCenter();
+
+      const markerSize = 10; // Adjust the size of the marker as needed
+      const tileSize = 50;
+      const tileGap = 5;
+
+      const leftPosition = chainCenter.x * (tileSize + tileGap) + tileSize / 2 - markerSize / 2;
+      const topPosition = chainCenter.y * (tileSize + tileGap) + tileSize / 2 - markerSize / 2;
+
+      centerMarker.value.style.left = `${leftPosition}px`;
+      centerMarker.value.style.top = `${topPosition}px`;
+    }
 
 
-    return { grid, tiles, dragStart, drop, isValidMove, isAdjacentIndex, isConnected, floodFill, dragEnter, dragLeave };
+    return {
+      dragEnd,
+      grid,
+      tiles,
+      dragStart,
+      drop,
+      isValidMove,
+      isAdjacentIndex,
+      isConnected,
+      floodFill,
+      dragEnter,
+      dragLeave,
+      updateCenterMarker,
+      findChainCenter,
+      centerMarker
+    };
   },
 };
 </script>
 
 <style scoped>
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(16, 50px);
   grid-template-rows: repeat(16, 50px);
-  gap: 1px;
+  gap: 5px;
 }
-
-.tile {
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
-  background-color: white;
-}
-
-.filled {
-  background-color: blue;
-}
-.preview {
-  background-color: rgba(0, 0, 255, 0.5);
-}
-.hide {
-  opacity: 0;
+.center-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 10;
 }
 </style>

@@ -15,19 +15,20 @@
 <!--          @dragenter.prevent-->
 <!--      ></Tile>-->
 <!--    </div>-->
-    <div class="grid gap-1 grid-container">
-      <div v-for="row in rows" :key="row">
-        <vue-draggable v-model="grid">
+    <div class="grid gap-1 grid-container" :style="gridStyle">
+      <div v-for="(row, index) in rows" :key="row">
+        <vue-draggable tag="transition-group" v-model="grid" item-key="id">
           <template v-slot:item="{item}">
             <Tile :isOn="item.filled"
                   :key="item"
                   class="draggable"
                   :isMovable="true"
-                  :location="[Math.floor(row), grid.index] "
+                  :location="[Math.floor(row), index%gridSize] "
                   ref="tiles"
                   draggable="true"
                   @dragover.prevent
                   @dragenter.prevent
+                  @change="onchange"
             ></Tile>
 
           </template>
@@ -50,8 +51,10 @@ export default {
   name: "TilesArray",
   components: {VueDraggable, Tile},
   setup() {
-    const grid = ref(createGrid(16, 2));
+    const gridSize = 16;
+    const grid = ref(createGrid(gridSize, 2));
     const rows = ref(16);
+
 
     const mouseX = ref(0); // Current mouse X position
     const mouseY = ref(0); // Current mouse Y position
@@ -59,7 +62,7 @@ export default {
     const elementTop = computed(() => mouseY.value + "px"); // Set the top position based on the mouse Y position
     const elementLeft = computed(() => mouseX.value + "px"); // Set the left position based on the mouse X position
 
-
+  // const onchange = (event) => {
 
     function createGrid(size, filledCount) {
       return Array.from({length: size}, (_, index) => ({
@@ -83,7 +86,7 @@ export default {
       document.removeEventListener('mousemove', updateMousePosition);
     });
 
-    return {mouseX, mouseY, elementTop, elementLeft, grid, rows };
+    return {mouseX, mouseY, elementTop, elementLeft, grid, rows, gridSize };
   },
 }
 </script>
@@ -91,8 +94,8 @@ export default {
 <style scoped>
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(16, 50px);
-  grid-template-rows: repeat(16, 50px);
+  grid-template-columns: repeat(16, 100px);
+  grid-template-rows: repeat(16, 100px);
   gap: 2px;
 }
 

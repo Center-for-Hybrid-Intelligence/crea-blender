@@ -2,6 +2,7 @@
   <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
   <CreativeGame  @end="endChallenge" />
   <CreativeDone v-if="challengeIsDone"/>
+  <TilesArray></TilesArray>
 </template>
 
 <script>
@@ -10,10 +11,11 @@ import CreativeInfo from "@/components/Tiles/Creative/TilesCreativeInfoDogs.vue"
 import CreativeGame from "@/components/Tiles/Creative/TilesCreativeGameDogs.vue";
 import CreativeDone from "@/components/Tiles/Creative/TilesCreativeDone.vue";
 import {ref} from "vue";
+import TilesArray from "@/components/TilesArray.vue";
 
 export default {
   name: "TilesCreativeDogsView",
-  components: {CreativeDone, CreativeGame, CreativeInfo},
+  components: {CreativeDone, CreativeGame, CreativeInfo, TilesArray},
   setup() {
     const challengeStarted = ref(false);
     const challengeIsDone = ref(false);
