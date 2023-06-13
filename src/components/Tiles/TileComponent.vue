@@ -1,20 +1,22 @@
 <template>
   <div
       class="tile"
-      :class="{ filled: filled }"
+      :class="{ filled: filled}"
       ref="tile"
-      draggable="true"
+      :draggable="draggable"
       @dragstart="dragStart"
       @dragover.prevent
       @dragend="dragEnd"
       @dragenter="dragEnter"
       @dragleave="dragLeave"
       @drop="drop"
+      :style="{'height': tileSize + 'px', 'width': tileSize + 'px' }"
+
   ></div>
 </template>
 
 <script>
-import { ref } from "vue";
+import {computed, ref} from "vue";
 export default {
   name: "TileComponent",
   props: {
@@ -26,6 +28,15 @@ export default {
       type: Number,
       required: true,
     },
+    size: {
+      type: Number,
+      required: true,
+      default: 50,
+    },
+    draggable: {
+      type: Boolean,
+      default: true,
+    },
     onDragStart: Function,
     onDrop: Function,
     onDragEnter: Function,
@@ -35,17 +46,32 @@ export default {
   setup(props) {
     const tile = ref(null);
 
+    const tileSize = computed(() => {
+      console.log(props.size)
+      return props.size;
+    });
+
     function dragStart() {
+      if (!props.draggable) {
+        return;
+      }
       props.onDragStart(props.index);
       setTimeout(() => tile.value.classList.add("hide"), 0);
+
     }
 
     function drop() {
+      if (!props.draggable) {
+        return;
+      }
       tile.value.classList.remove("hide");
       props.onDrop(props.index);
     }
 
     function dragEnter() {
+      if (!props.draggable) {
+        return;
+      }
       props.onDragEnter(props.index);
     }
 
@@ -64,6 +90,7 @@ export default {
       dragEnter,
       dragLeave,
       dragEnd,
+      tileSize,
     };
   },
 };
@@ -71,9 +98,7 @@ export default {
 
 <style scoped>
 .tile {
-  width: 100px;
-  height: 100px;
-  border: #3182ce solid 1px;
+  /*border: #3182ce solid 1px;*/
 }
 
 .filled {
