@@ -1,6 +1,5 @@
 <template>
   <div ref="gridContainer" class="grid-container relative"
-
          :style="{
             'grid-template-columns': 'repeat(' + gridSizeTemplate + ', ' + tileSizeTemplate + 'px)',
             'grid-template-rows': 'repeat(' + gridSizeTemplate + ', ' + tileSizeTemplate + 'px)',
@@ -48,7 +47,7 @@ export default {
     },
     filledCount: {
       type: Number,
-      default: 15,
+      default: 10,
     },
     editable: {
       type: Boolean,

@@ -1,8 +1,5 @@
 <template>
-  <LModeSelection class="w-60 self-center">
-    <template #image>
-      <img src="../../../assets/tutorial.jpg" alt="Placeholder Image " class="rounded-t-lg">
-    </template>
+  <LModeSelection class="w-60  self-center" :img="'tutorial.jpg'">
     <template #title>
       <div class="text-lg">
       Tutorial
@@ -16,9 +13,9 @@
     </template>
     <template #button>
       <router-link to="/tiles/challenges" >
-        <div class="bg-green-500 w-full h-12 rounded-b-lg flex justify-center items-center cursor-pointer text-white ">
-          Start
-        </div>
+          <div class="bg-green-500 w-full h-12 rounded-b-lg flex justify-center items-center cursor-pointer text-white ">
+            Start
+          </div>
       </router-link>
     </template>
 
