@@ -1,8 +1,5 @@
 <template>
-  <LModeSelection class="w-72">
-    <template #image>
-      <img src="../../../assets/placeholder.png" alt="Placeholder Image">
-    </template>
+  <LModeSelection class="w-72" :img="'tiles.jpg'">
     <template #title>
         Challenges
     </template>

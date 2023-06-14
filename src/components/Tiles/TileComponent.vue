@@ -104,6 +104,10 @@ export default {
 
 <style scoped>
 .tile {
+  /*
+  border: #3182ce solid 1px;
+  */
+
 }
 
 .filled {

@@ -1,8 +1,5 @@
 <template>
-  <LModeSelection :locked="false" class="w-72">
-    <template #image>
-      <img src="../../../assets/placeholder.png" alt="Placeholder Image">
-    </template>
+  <LModeSelection :locked="false" class="w-72" :img="'placeholder.png'">
     <template #title>
       Creative
     </template>

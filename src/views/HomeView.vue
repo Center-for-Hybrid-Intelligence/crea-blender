@@ -1,6 +1,6 @@
 <template>
 
-  <div class="flex flex-col h-screen justify-center items-center gap-16">
+  <div class="flex flex-col  justify-center items-center gap-8">
     <!-- get user information here  -->
     <UserInfo v-if="userInfo"/>
     <div class="flex justify-between z-50 absolute top-0 right-0 p-8">
@@ -13,14 +13,13 @@
         />
       </div>
     </div>
-    <h1 class="font-extrabold text-7xl text-white">
+    <h1 class="font-extrabold k1:text-7xl text-5xl mt-24  justify-center text-white">
       Crea. Games
     </h1>
-    <div class="flex gap-24">
+    <div class="flex gap-20 flex-wrap m-12 justify-center">
       <LGameCard
           :path="'/tiles'"
           :img="'tiles.jpg'"
-
       >
         <template #title1>
           Crea.

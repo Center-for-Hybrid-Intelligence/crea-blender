@@ -1,5 +1,7 @@
 <template>
+<!--
   <ChallengeInfo v-if="!challengeStarted" @start="startChallenge"/>
+-->
   <div class="m-auto">
     <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge" />
   </div>

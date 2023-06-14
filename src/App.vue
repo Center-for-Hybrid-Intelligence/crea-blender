@@ -1,5 +1,5 @@
 <template>
-    <div class="relative ">
+    <div class="relative min-h-screen">
       <div id="gradient-container" class="absolute inset-0"></div>
       <div class="relative z-10">
         <Header/>
