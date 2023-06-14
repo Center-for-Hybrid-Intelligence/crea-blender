@@ -19,7 +19,7 @@
           :on-drag-end="dragEnd"
           :size="tileSize"
           :draggable="editable"
-          @safeChain="saveChain"
+          @save-chain="saveChain"
       />
       <div class="center-marker" ref="centerMarker"></div>
 
@@ -78,6 +78,7 @@ export default {
     });
     function createGrid(size, filledCount) {
       if (props.chain) {
+        console.log(props.chain, "found chain")
         return props.chain
       }
 

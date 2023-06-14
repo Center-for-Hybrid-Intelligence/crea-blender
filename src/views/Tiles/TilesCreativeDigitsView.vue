@@ -48,6 +48,7 @@ export default {
     }
 
     const saveChain = (chain) => {
+      console.log(chain + " saved")
       myChains.value.push(chain);
       console.log(myChains);
     }
