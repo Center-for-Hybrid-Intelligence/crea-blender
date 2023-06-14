@@ -10,7 +10,9 @@
       @dragenter="dragEnter"
       @dragleave="dragLeave"
       @drop="drop"
-      :style="{'height': tileSize + 'px', 'width': tileSize + 'px' }"
+      :style="{'height': tileSize + 'px', 'width': tileSize + 'px',
+              'border' : devTile ? '1px solid black' : null,
+       }"
 
   ></div>
 </template>
@@ -36,6 +38,10 @@ export default {
     draggable: {
       type: Boolean,
       default: true,
+    },
+    devTile: {
+      type: Boolean,
+      default: false,
     },
     onDragStart: Function,
     onDrop: Function,
@@ -98,16 +104,13 @@ export default {
 
 <style scoped>
 .tile {
-  /*border: #3182ce solid 1px;*/
 }
 
 .filled {
   background-color: blue;
   box-shadow: gray 0px 0px 5px 0px;
 }
-.preview {
-  border: #3182ce 5px solid;
-}
+
 .hide {
   opacity: 0;
 }

@@ -20,8 +20,12 @@
           :size="tileSize"
           :draggable="editable"
           @save-chain="saveChain"
+          :devTile="devMode"
       />
-      <div class="center-marker" ref="centerMarker"></div>
+      <div class="center-marker" ref="centerMarker"
+      :style="{
+  'visibility': devMode ? 'visible' : 'hidden',}"
+      ></div>
 
     </div>
 
@@ -48,7 +52,7 @@ export default {
     },
     filledCount: {
       type: Number,
-      default: 15,
+      default: 10,
     },
     editable: {
       type: Boolean,
@@ -60,6 +64,10 @@ export default {
     gap: {
       type: Number,
       default: 10,
+    },
+    devMode: {
+      type: Boolean,
+      default: false,
     }
   },
   setup(props, {emit}) {
@@ -297,11 +305,15 @@ export default {
 
 }
 .center-marker {
+
   position: absolute;
   width: 10px;
   height: 10px;
   background-color: red;
   border-radius: 50%;
   z-index: 10;
+}
+.preview {
+  border: #3182ce 5px solid;
 }
 </style>

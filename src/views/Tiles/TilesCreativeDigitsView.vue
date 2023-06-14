@@ -8,6 +8,7 @@
         :editable="true"
         ref="tileGrid"
         @save-chain="saveChain"
+        :devMode="false"
     > </TileGrid>
   <img @click="toggleGallery"  class="absolute top-20 right-12 h8:right-24 k15:right-36 k1:right-36 cursor-pointer transition-all hover:animate-wiggle" src="../../../public/photo-gallery-icon.svg" alt="Open gallery">
 
@@ -48,10 +49,20 @@ export default {
     }
 
     const saveChain = (chain) => {
-      console.log(chain + " saved")
-      myChains.value.push(chain);
-      console.log(myChains);
-    }
+      // Check if the chain already exists in the myChains.value array
+      const chainExists = myChains.value.some((existingChain) => {
+        return JSON.stringify(existingChain) === JSON.stringify(chain);
+      });
+
+      // If the chain doesn't already exist, add it to myChains.value, and log the changes
+      if (!chainExists) {
+        console.log(chain + " is being saved");
+        myChains.value.push(JSON.parse(JSON.stringify(chain))); // Deep copy
+        console.log(myChains);
+      } else {
+        console.log(chain + " already exists in the array and won't be added again.");
+      }
+    };
 
     const grids = ref(4)
     return {

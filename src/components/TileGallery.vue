@@ -6,8 +6,8 @@
       <button class="bg-black absolute top-0 right-0 rounded-full text-white w-12 h-12 font-bold text-2xl p-2 m-2" @click="$emit('close')">X</button>
     </div>
     <div class="grid grid-cols-3 gap-1 k15:gap-4">
-      <div v-for="(shape, index) in createdShapes" :key="index" class="p-2  k15:p-5 ">
-        {{shape}}
+      <div v-for="shape in createdShapes" :key="shape" class= "p-2  k15:p-5 ">
+<!--        {{shape}}-->
         <TileGrid
             :filledCount="10"
             :gridSize="10"
@@ -16,7 +16,7 @@
             :editable="false"
             ref="tileGrid"
             :chain="shape"
-        ></TileGrid>
+        > </TileGrid>
       </div>
     </div>
   </div>
@@ -24,7 +24,6 @@
 
 <script>
 import TileGrid from "@/components/Tiles/TileGrid.vue";
-import {ref} from "vue";
 export default {
   name: "TileGallery",
   components: {TileGrid},
@@ -42,9 +41,7 @@ export default {
 
   },
   setup() {
-    const grids = ref(4)
     return {
-      grids,
       TileGrid,
     };
   },
