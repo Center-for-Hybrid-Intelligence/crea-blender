@@ -5,6 +5,7 @@
 
 <script>
 import { ref } from "vue";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Tile",
@@ -34,6 +35,7 @@ export default {
     const mouseUp = () => {
       if (props.isDroppable) {
         // Dropping logic
+
         emit("drop", props.location);
       }
       isDragged.value = false;
