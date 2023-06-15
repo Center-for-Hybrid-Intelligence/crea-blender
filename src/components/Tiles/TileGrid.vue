@@ -317,6 +317,7 @@ export default {
   z-index: 10;
 }
 .preview {
-  border: #3182ce 5px solid;
-}
+  border-radius: 0.5rem;
+  border: 0.3em solid #89f2f2;
+  }
 </style>

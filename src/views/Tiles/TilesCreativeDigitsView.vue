@@ -6,10 +6,19 @@
         <img draggable="false" src="../../assets/camera.png"  class="p-4" alt="">
         <div :class="{light: enabled}" >
         </div>
+
+
       </div>
     </div>
   </div>
-
+  <div class="absolute right-36 bottom-36 flex items-center justify-center text-white text-3xl font-bold">
+  <button v-if="timer === 0" @click="startTimer()" class="button buttonSecondary">
+    Start
+  </button>
+  <div v-if="timer > 0" >
+    {{ timer }}
+  </div>
+  </div>
   <div class="w-screen h-screen overflow-hidden group-hover:border-black group-hover:border-2 border-black p-12">
     <TileGrid
         class=" "
@@ -20,7 +29,7 @@
         :editable="true"
         ref="tileGrid"
         @save-chain="saveChain"
-        :devMode="true"
+        :devMode="false"
     > </TileGrid>
   </div>
 
@@ -58,6 +67,7 @@ export default {
     const enabled = ref(false)
     const animatedChain = ref([]);
 
+    const timer = ref(0);
 
     const saveChain = (chain) => {
       animatedChain.value = chain ; // Deep copy
@@ -81,6 +91,18 @@ export default {
       }
     };
 
+    const startTimer = () => {
+      if (timer.value === 0) {
+        timer.value = 45;
+        const countdown = setInterval(() => {
+          timer.value--;
+          if (timer.value === 0) {
+            clearInterval(countdown);
+          }
+        }, 1000);
+      }
+    }
+
     return {
       TileGrid,
       showGallery,
@@ -90,6 +112,8 @@ export default {
       mp3File,
       enabled,
       animatedChain,
+      startTimer,
+      timer,
     };
   },
 };

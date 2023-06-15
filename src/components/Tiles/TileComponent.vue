@@ -15,12 +15,13 @@
        }"
 
   >
-    <div v-if="devTile">{{index}}</div>
+    <div v-if="devTile">{{ index }}</div>
   </div>
 </template>
 
 <script>
 import {computed, ref} from "vue";
+
 export default {
   name: "TileComponent",
   props: {
@@ -113,8 +114,10 @@ export default {
 }
 
 .filled {
-  background-color: blue;
+  background-color: #d5fff7;
   box-shadow: gray 0px 0px 5px 0px;
+  border-radius: 0.5rem;
+  border: 0.3em solid #89f2f2;
 }
 
 .hide {

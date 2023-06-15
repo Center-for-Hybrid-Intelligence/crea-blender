@@ -19,6 +19,7 @@ module.exports = {
       },
       colors: {
         neutral: '#e5e7eb',
+        tileBackground: '#d5fff7',
       },
       keyframes: {
         wiggle: {
