@@ -20,7 +20,7 @@
         :editable="true"
         ref="tileGrid"
         @save-chain="saveChain"
-        :devMode="false"
+        :devMode="true"
     > </TileGrid>
   </div>
 
