@@ -33,6 +33,8 @@
 import Tile from "@/components/Tiles/TileComponent.vue";
 import {ref} from "vue";
 import {onMounted} from "vue";
+import mp3File from '@/assets/audio/placeTile.mp3'; // Replace 'file.mp3' with your actual file path
+
 
 export default {
   components: {
@@ -132,6 +134,8 @@ export default {
     function drop(index) {
       tiles.value[draggedTileIndex].classList.remove("hide");
       if (!tiles.value[index].classList.contains("filled") && isValidMove(draggedTileIndex, index)) {
+        const audio = new Audio(mp3File);
+        audio.play();
         grid.value[draggedTileIndex].filled = false;
         grid.value[index].filled = true;
 

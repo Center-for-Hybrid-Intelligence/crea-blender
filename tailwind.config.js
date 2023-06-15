@@ -26,6 +26,12 @@ module.exports = {
           '33%': { transform: 'rotate(-3deg)' },
           '66%': { transform: 'rotate(3deg)' },
           '100%': { transform: 'rotate(0deg)' },
+        },
+
+        flash: {
+          '0%': { opacity: "0" },
+          '50%': { opacity: "100" },
+          '100%': { opacity: "0" },
         }
 
       },
