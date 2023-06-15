@@ -45,20 +45,6 @@
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias.
         </template>
       </LGameCard>
-      <LGameCard
-          :path="'/blender'"
-          :img="'blending.jpg'"
-      >
-        <template #title1>
-          Crea.
-        </template>
-        <template #title2>
-         Blender
-        </template>
-        <template #description>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias.
-        </template>
-      </LGameCard>
 
 
 

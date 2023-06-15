@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div >
     <div class="w-full flex justify-center absolute top-12 ">
       <div @click="$refs.tileGrid.saveChain()" class="z-50 rounded-full border-white border-8 aspect-square h-28 group hover cursor-pointer">
         <img draggable="false" src="../../assets/camera.png"  class="p-4" alt="">
@@ -24,10 +24,10 @@
     > </TileGrid>
   </div>
 
-  <div @click="toggleGallery"  class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-50">
-    <img draggable="false"  class="" src="../../../public/photo-gallery-icon.svg" alt="Open gallery">
-    <div class="h-8 w-8 rounded-full bg-green-500 absolute -bottom-2 -right-2 justify-center align-middle flex">
-      <h2 class="text-white text-xl self-center">
+  <div @click="toggleGallery" draggable="false"  class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-50">
+    <img draggable="false"  class="w-24 h-24" src="@/assets/imageGallery.svg" alt="Open gallery">
+    <div  class="h-8 w-8 rounded-full bg-green-500 absolute -bottom-2 -right-2 justify-center align-middle flex">
+      <h2  class="text-white text-xl self-center">
       {{myChains.length}}
       </h2>
     </div>

@@ -3,7 +3,6 @@
 <!--
     <router-link :to="path">
 -->
-
     <div v-if="locked" class="absolute flex items-center justify-center w-full h-full">
       <img src="../../../src/assets/locked.png" alt="Placeholder Image" class="w-24 object-contain ">
     </div>
