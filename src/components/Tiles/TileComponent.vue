@@ -14,7 +14,9 @@
               'border' : devTile ? '1px solid black' : null,
        }"
 
-  ></div>
+  >
+    <div v-if="devTile">{{index}}</div>
+  </div>
 </template>
 
 <script>

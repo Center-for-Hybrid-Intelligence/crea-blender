@@ -17,7 +17,7 @@
         :editable="true"
         ref="tileGrid"
         @save-chain="saveChain"
-        :devMode="false"
+        :devMode="true"
     > </TileGrid>
   </div>
   <div @click="toggleGallery"  class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-50">
