@@ -17,6 +17,8 @@
           :on-drag-leave="dragLeave"
           :on-drag-end="dragEnd"
           :size="tileSize"
+          :border-radius="borderRadius"
+          :border-size="borderSize"
           :draggable="editable"
           @save-chain="saveChain"
           :devTile="devMode"
@@ -50,6 +52,14 @@ export default {
     tileSize: {
       type: Number,
       default: 50,
+    },
+    borderRadius: {
+      type: Number,
+      default: 0.5,
+    },
+    borderSize: {
+      type: Number,
+      default: 0.3,
     },
     filledCount: {
       type: Number,

@@ -11,7 +11,7 @@
       @dragleave="dragLeave"
       @drop="drop"
       :style="{'height': tileSize + 'px', 'width': tileSize + 'px',
-              'border' : devTile ? '1px solid black' : null,
+              'border' : devTile ? '1px solid black' : filled ? borderSize + 'rem solid #89f2f2' : null, 'border-radius': borderRadius + 'em'
        }"
 
   >
@@ -37,6 +37,16 @@ export default {
       type: Number,
       required: true,
       default: 50,
+    },
+    borderRadius: {
+      type: Number,
+      required: true,
+      default: 0.5,
+    },
+    borderSize: {
+      type: Number,
+      required: true,
+      default: .3,
     },
     draggable: {
       type: Boolean,
@@ -115,9 +125,9 @@ export default {
 
 .filled {
   background-color: #d5fff7;
+  /*
   box-shadow: gray 0px 0px 5px 0px;
-  border-radius: 0.5rem;
-  border: 0.3em solid #89f2f2;
+  */
 }
 
 .hide {
