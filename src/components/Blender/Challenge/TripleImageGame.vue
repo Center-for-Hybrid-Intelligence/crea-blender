@@ -14,8 +14,8 @@
 
 <script>
 import {ref} from "vue";
-import TripleImage from "@/components/TripleImage.vue";
-import BigImage from "@/components/BigImage.vue";
+import TripleImage from "@/components/Blender/Challenge/TripleImage.vue";
+import BigImage from "@/components/Blender/Challenge/BigImage.vue";
 export default {
   name: "TripleImageGame",
   components: {BigImage, TripleImage},

@@ -44,7 +44,7 @@
 
 <script>
 import {ref, onMounted, onUnmounted, computed} from 'vue';
-import Tile from "@/components/Tile.vue";
+import Tile from "@/components/Tiles/Tile.vue";
 import VueDraggable from "vue3-draggable";
 
 export default {

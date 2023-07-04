@@ -3,11 +3,11 @@
 
     <div class="flex flex-col w-full p-12 k1:p-0 k1:w-3/5 gap-12 ">
     <div class="flex justify-between">
-      <img src="../../src/assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
+      <img src="../../../assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
       <div class="flex align-middle justify-center ">
         <ComparisonValue :value="slider1" :value2="slider2" />
       </div>
-      <img src="../../src/assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
+      <img src="../../../assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-60 h-60">
     </div>
     <div class="flex justify-between">
       <ImageWithSlider @changeSlider="value => handleSlider(value, 'slider1')"/>
@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import ImageWithSlider from "@/components/ImageWithSlider.vue";
-import ComparisonValue from "@/components/ComparisonValue.vue";
+import ImageWithSlider from "@/components/Blender/Creative/ImageWithSlider.vue";
+import ComparisonValue from "@/components/Blender/Creative/ComparisonValue.vue";
 import {ref} from "vue";
 
 export default {

@@ -1,23 +1,24 @@
 <template>
   <LInfo>
     <template #title>
-      <h1 class="self-center">
+      <h1 class="  ">
         Well done!
         You have completed a challenge!
       </h1>
     </template>
     <template #body>
-          <p>
-            Click below to the return to the game menu for
-            even more challenges!  </p>
+      <p class="text-center">
+        Click below to the return to the game menu for
+        even more challenges!
+      </p>
 
     </template>
 
     <template #button>
-      <router-link to="/" >
-      <button class="button">
-        Menu
-      </button>
+      <router-link to="/">
+        <button class="button">
+          Menu
+        </button>
       </router-link>
     </template>
 

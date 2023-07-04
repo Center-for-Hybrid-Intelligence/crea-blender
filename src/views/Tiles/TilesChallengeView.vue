@@ -1,15 +1,13 @@
 <template>
-<!--
   <ChallengeInfo v-if="!challengeStarted" @start="startChallenge"/>
--->
-  <div class="m-auto">
-    <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge" />
+  <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
+  <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge"/>
   </div>
   <ChallengeDone v-if="challengeIsDone"/>
 </template>
 
 
-  <script>
+<script>
 import ChallengeInfo from "@/components/Tiles/Challenge/TilesChallengeInfo.vue";
 import ChallengeDone from "@/components/Tiles/Challenge/TilesChallengeDone.vue";
 import FindBestFigureGame from "@/components/Tiles/Challenge/FindBestFigureGame.vue";

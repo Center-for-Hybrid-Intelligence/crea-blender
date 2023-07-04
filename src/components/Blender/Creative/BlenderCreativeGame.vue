@@ -24,8 +24,8 @@
 </div>
 
   <div @click="toggleGallery" draggable="false"
-       class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-50">
-    <img draggable="false" class="w-24 h-24" src="@/assets/imageGallery.svg" alt="Open gallery">
+       class="absolute top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-20">
+    <img draggable="false" class="w-20 h-20" src="@/assets/imageGallery.svg" alt="Open gallery">
   </div>
   <div class="w-screen h-screen">
     <BlenderGallery @close="toggleGallery" :visible="showGallery"/>
@@ -36,12 +36,12 @@
 </template>
 
 <script>
-import ImageWithSlider from "@/components/ImageWithSlider.vue";
+import ImageWithSlider from "@/components/Blender/Creative/ImageWithSlider.vue";
 import {ref} from "vue";
 /*
 import Gallery from "@/components/Gallery.vue";
 */
-import BlenderGallery from "@/components/BlenderGallery.vue";
+import BlenderGallery from "@/components/Blender/Creative/BlenderGallery.vue";
 
 export default {
   name: "CreativeGame",

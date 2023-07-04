@@ -7,7 +7,7 @@
       </h1>
     </template>
     <template #body>
-      <p>
+      <p class="text-center">
         Click below to the return to the game menu for
         even more challenges!  </p>
 

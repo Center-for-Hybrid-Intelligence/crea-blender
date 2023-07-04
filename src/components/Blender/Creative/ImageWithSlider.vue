@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center gap-6">
-    <img src="../../src/assets/placeholder.png" alt="Placeholder Image" :class="{'opacity-50': sliderValueLocale === 0}" class="object-contain border-4 w-48 h-48"
+    <img src="../../../assets/placeholder.png" alt="Placeholder Image" :class="{'opacity-50': sliderValueLocale === 0}" class="object-contain border-4 w-48 h-48"
     />
     <input
         type="range"

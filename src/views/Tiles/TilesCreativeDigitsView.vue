@@ -1,9 +1,12 @@
 <template>
 
+  <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
+  <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
+
   <div class="">
     <div class="w-full flex flex-col justify-center items-center absolute top-12 gap-2 ">
       <div @click="$refs.tileGrid.saveChain()"
-           class="z-50 rounded-full border-white border-8 aspect-square h-28 w-28 group hover cursor-pointer">
+           class="z-30 rounded-full border-white border-8 aspect-square h-28 w-28 group hover cursor-pointer">
         <img draggable="false" src="../../assets/camera.png" class="p-4" alt="">
         <div :class="{light: enabled, redLight: redEnabled }">
         </div>
@@ -15,12 +18,12 @@
 
 
   </div>
-  <div class="absolute right-36 bottom-36 flex items-center justify-center text-white text-3xl font-bold">
-    <button v-if="timer === 0" @click="startTimer()" class="button buttonSecondary ">
-      Start
-    </button>
-    <div v-if="timer > 0">
+  <div class="absolute right-12 bottom-12 flex items-center justify-center text-white text-3xl font-bold">
+    <div v-if="timer >= 0">
       {{ timer }}
+    </div>
+    <div v-if="timer < 0 " class=" flex flex-col ">
+      <button @click="endChallenge" class="buttonSecondary z-30">Finish</button>
     </div>
   </div>
   <div class="w-screen h-screen overflow-hidden group-hover:border-black group-hover:border-2 border-black p-12">
@@ -40,8 +43,8 @@
   </div>
 
   <div @click="toggleGallery" draggable="false"
-       class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-50">
-    <img draggable="false" class="w-24 h-24" src="@/assets/imageGallery.svg" alt="Open gallery">
+       class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-30">
+    <img draggable="false" class="w-20 h-20" src="@/assets/imageGallery.svg" alt="Open gallery">
     <div class="h-8 w-8 rounded-full bg-green-500 absolute -bottom-2 -right-2 justify-center align-middle flex">
       <h2 class="text-white text-xl self-center">
         {{ myChains.length }}
@@ -50,19 +53,25 @@
   </div>
 
   <TileGallery @close="toggleGallery" :createdShapes="myChains" :visible="showGallery"/>
+    </div>
+  <CreativeDone v-if="challengeIsDone"/>
 
 
 </template>
 <script>
 import TileGrid from "@/components/Tiles/TileGrid.vue";
 import {ref} from "vue";
-import TileGallery from "@/components/TileGallery.vue";
+import TileGallery from "@/components/Tiles/Creative/TileGallery.vue";
 import mp3File from '@/assets/audio/flash.mp3';
+import CreativeInfo from "@/components/Tiles/Creative/TilesCreativeInfoDigits.vue";
+import CreativeDone from "@/components/Tiles/Creative/TilesCreativeDone.vue";
 
 export default {
   components: {
     TileGallery,
     TileGrid,
+    CreativeDone,
+    CreativeInfo
   },
   name: "TilesCreativeDigitsView",
   setup() {
@@ -76,7 +85,19 @@ export default {
     const redEnabled = ref(false)
     const animatedChain = ref([]);
 
-    const timer = ref(0);
+    const challengeStarted = ref(false);
+    const challengeIsDone = ref(false);
+
+    const startChallenge = () => {
+      console.log("start");
+      startTimer()
+      challengeStarted.value = true;
+    }
+    const endChallenge = () => {
+      console.log("end");
+      challengeIsDone.value = true;
+    }
+    const timer = ref(5);
 
     const saveChain = (chain) => {
       animatedChain.value = chain; // Deep copy
@@ -108,17 +129,13 @@ export default {
     };
 
     const startTimer = () => {
-      if (timer.value === 0) {
-        timer.value = 45;
-        const countdown = setInterval(() => {
-          timer.value--;
-          if (timer.value === 0) {
-            clearInterval(countdown);
-          }
-        }, 1000);
-      }
+      const countdown = setInterval(() => {
+        timer.value--;
+        if (timer.value === -1) {
+          clearInterval(countdown);
+        }
+      }, 1000);
     }
-
     return {
       TileGrid,
       showGallery,
@@ -132,6 +149,12 @@ export default {
       startTimer,
       timer,
       showError,
+      CreativeDone,
+      CreativeInfo,
+      startChallenge,
+      endChallenge,
+      challengeStarted,
+      challengeIsDone
     };
   },
 };
@@ -139,77 +162,8 @@ export default {
 
 <style scoped>
 
-.light {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: 100%;
-  z-index: 2;
-  animation: 1s flash infinite;
-}
 
-.redLight {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: 100%;
-  z-index: 2;
-  animation: 1s redflash infinite;
-}
 
-@keyframes flash {
-  0% {
-    width: 0;
-    height: 0;
-  }
-  20% {
-    width: 1000px;
-    height: 1000px;
-  }
-  25% {
-    width: 0;
-    height: 0;
-  }
-  50% {
-    width: 0;
-    height: 0;
-  }
-  100% {
-    width: 0;
-    height: 0;
-  }
-}
-
-@keyframes redflash {
-  0% {
-    width: 0;
-    height: 0;
-  }
-  20% {
-    width: 150px;
-    height: 150px;
-  }
-  25% {
-    width: 0;
-    height: 0;
-  }
-  50% {
-    width: 0;
-    height: 0;
-  }
-  100% {
-    width: 0;
-    height: 0;
-  }
-}
 
 
 </style>

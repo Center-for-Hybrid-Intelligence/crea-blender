@@ -8,7 +8,7 @@
     <template #body>
       <div class="flex w-full">
         <div class="w-1/5">
-        <img src="../assets/hourglass.png" class="w-12" alt="Home">
+        <img src="../../../assets/hourglass.png" class="w-12" alt="Home">
         </div>
         <div class="w-4/5">
           <p>
