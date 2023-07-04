@@ -1,21 +1,39 @@
 <template>
-    <div class="relative min-h-screen">
-      <div id="gradient-container" class="absolute inset-0"></div>
-      <div class="relative z-10">
-        <Header/>
-        <router-view/>
+  <div class="relative min-h-screen">
+    <div id="gradient-container" class="absolute inset-0"></div>
+    <div class="relative z-10">
+      <Header/>
 
-      </div>
+      <router-view v-slot="{Component}">
+<!--
+        <transition name="fade"  >
+-->
+          <component :is="Component"/>
+<!--        </transition>-->
+      </router-view>
+
     </div>
+  </div>
 
 </template>
 
 <style>
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
 </style>
 <script setup>
 import Header from "@/components/Header.vue";
-document.addEventListener('mousemove', function(event) {
+
+document.addEventListener('mousemove', function (event) {
   const gradientContainer = document.getElementById('gradient-container');
   const xPos = event.clientX / window.innerWidth * 5 - 1;
   const yPos = event.clientY / window.innerHeight * 5 - 1;

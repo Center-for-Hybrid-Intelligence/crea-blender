@@ -56,7 +56,9 @@
            class="h-16 cursor-pointer object-contain hover bg-white">
     </router-link>
 
+<!--
     <router-view></router-view>
+-->
 
   </div>
 </template>
