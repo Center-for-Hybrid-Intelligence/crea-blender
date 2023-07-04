@@ -1,6 +1,6 @@
 <template>
-  <div class="absolute w-screen h-screen flex justify-center items-center z-40">
-    <div class="border-4 border-black bg-gray-200 rounded-lg w-full k1:w-1/2 p-8 px-16">
+    <div class="absolute z-50 k1:p-12 p-6 w-11/12 k1:w-3/5 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-75 backdrop-blur-2xl backdrop-brightness-125 rounded-3xl shadow-gray-700 shadow-2xl z-50 overflow-x-hidden  h-5/6">
+      <div class="h-full flex flex-col justify-between">
       <div class="text-center heading1">
           <slot name="title"></slot>
       </div>
@@ -11,8 +11,8 @@
           <slot name="button"></slot>
 
       </div>
-    </div>
 
+      </div>
   </div>
 </template>
 

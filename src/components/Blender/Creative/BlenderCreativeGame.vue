@@ -5,9 +5,8 @@
           <div class="flex relative group">
 
           <img src="../../../assets/placeholder.png" alt="Placeholder Image" class="object-contain bg-slate-300 h-80 h-60 group-hover:border-8 border-8 border-transparent group-hover:transition-all group-hover:duration-200 group-hover:border-black border-grey border-dashed cursor-pointer">
-            <div class="absolute -bottom-10 -right-10 w-20 h-20 group-hover:-bottom-12 group-hover:-right-12 group-hover:w-24 group-hover:h-24 bg-white rounded-lg p-4 shadow-2xl shadow-zinc-950 group-hover:p-3 transition-all group-hover:transition-all group-hover:duration-200 cursor-pointer">
-              <img src="../../../assets/camera.png" alt="Camera" class="object-contain">
-
+            <div class="absolute -bottom-10 -right-10 w-20 h-20 group-hover:-bottom-12 group-hover:-right-12 group-hover:w-24 group-hover:h-24 bg-white rounded-lg p-3 shadow-2xl shadow-zinc-950 group-hover:p-2 transition-all group-hover:transition-all group-hover:duration-200 cursor-pointer">
+              <img src="../../../assets/cameraBlack.png" alt="Camera" class="object-contain ">
             </div>
           </div>
         </div>
@@ -23,22 +22,33 @@
         <button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</button>
       </div>
 </div>
-  <img @click="toggleGallery"  class="absolute top-1/2 right-12 h8:right-24 k15:right-1/4 k1:right-36 cursor-pointer transition-all hover:animate-wiggle" src="../../../../public/photo-gallery-icon.svg" alt="Open gallery">
 
+  <div @click="toggleGallery" draggable="false"
+       class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-50">
+    <img draggable="false" class="w-24 h-24" src="@/assets/imageGallery.svg" alt="Open gallery">
+  </div>
+  <div class="w-screen h-screen">
+    <BlenderGallery @close="toggleGallery" :visible="showGallery"/>
+  </div>
+<!--
   <Gallery @close="toggleGallery" :visible="showGallery"/>
+-->
 </template>
 
 <script>
 import ImageWithSlider from "@/components/ImageWithSlider.vue";
 import {ref} from "vue";
+/*
 import Gallery from "@/components/Gallery.vue";
+*/
+import BlenderGallery from "@/components/BlenderGallery.vue";
 
 export default {
   name: "CreativeGame",
   emits: [
     'end'
   ],
-  components: {ImageWithSlider, Gallery},
+  components: {BlenderGallery, ImageWithSlider},
   setup(props,{emit}){
     const slider1 = ref(50);
     const slider2 = ref(50);
