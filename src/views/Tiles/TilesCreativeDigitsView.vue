@@ -1,6 +1,6 @@
 <template>
 
-  <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
+  <CreativeInfo  @start="startChallenge"  :show="!challengeStarted"/>
   <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
 
   <div class="">
@@ -54,7 +54,7 @@
 
   <TileGallery @close="toggleGallery" :createdShapes="myChains" :visible="showGallery"/>
     </div>
-  <CreativeDone v-if="challengeIsDone"/>
+  <CreativeDone  :show="challengeIsDone"/>
 
 
 </template>

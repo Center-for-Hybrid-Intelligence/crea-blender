@@ -1,5 +1,5 @@
 <template>
-  <LInfo>
+  <LInfo :show="show">
     <template #title>
       <h1 class="  ">
         Well done!
@@ -31,7 +31,13 @@ import LInfo from "@/components/layout/LInfo.vue";
 
 export default {
   name: "ChallengeDone",
-  components: {LInfo}
+  components: {LInfo},
+  props: {
+    show:{
+      type: Boolean,
+      default: false,
+    }
+  },
 }
 </script>
 

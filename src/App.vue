@@ -1,15 +1,16 @@
 <template>
-  <div class="relative min-h-screen">
+  <div class="relative min-h-screen w-screen overflow-x-hidden">
     <div id="gradient-container" class="absolute inset-0"></div>
-    <div class="relative z-10">
+    <div class="relative z-10 ">
       <Header/>
 
-      <router-view v-slot="{Component}">
-<!--
-        <transition name="fade"  >
--->
+      <router-view v-slot="{Component, route}" class="absolute inset-0">
+        <transition
+        :enter-active-class="route.meta.enterClass"
+        :leave-active-class="route.meta.leaveClass"
+        >
           <component :is="Component"/>
-<!--        </transition>-->
+        </transition>
       </router-view>
 
     </div>

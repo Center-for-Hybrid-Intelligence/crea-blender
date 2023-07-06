@@ -1,6 +1,7 @@
 module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'class', // or 'media' or 'class'
+
   theme: {
     screens: { // px
       'h4': '400px',
@@ -14,6 +15,9 @@ module.exports = {
       'k35': '3500px',
     },
     extend: {
+      fontFamily:{
+      custom: "'Belanosima', sans-serif",
+      },
       animation: {
         'wiggle': 'wiggle 0.5s ease-in-out',
       },

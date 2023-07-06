@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-screen w-screen justify-center items-center gap-12">
-    <h1 class="font-extrabold text-5xl text-white">
+    <h1 class="font-extrabold text-5xl text-[#89f2f2] font-custom">
       Crea. Tiles
     </h1>
   <div class="flex justify-evenly w-screen  ">

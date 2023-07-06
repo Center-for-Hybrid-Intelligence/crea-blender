@@ -1,9 +1,9 @@
 <template>
-  <ChallengeInfo @start="startChallenge"  :class="{ 'opacity-0 scale-50': challengeStarted }" class="opacity-100 scale-100 transition-all duration-500 " />
+  <ChallengeInfo @start="startChallenge"  :show="!challengeStarted"  />
   <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }" class="transition-all duration-500 ">
-  <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge"/>
+  <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge" />
   </div>
-  <ChallengeDone v-if="challengeIsDone"/>
+  <ChallengeDone :show="challengeIsDone" />
 </template>
 
 

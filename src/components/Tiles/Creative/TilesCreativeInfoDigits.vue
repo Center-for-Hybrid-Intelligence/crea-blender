@@ -1,5 +1,5 @@
 <template>
-  <LInfo>
+  <LInfo :show="show">
     <template #title>
       <h1 class="self-center">
         Creative mode
@@ -51,6 +51,12 @@ export default {
     'start'
   ],
   components: {LInfo},
+  props: {
+    show:{
+      type: Boolean,
+      default: false,
+    }
+  },
   setup(props, {emit}) {
     const start = () => {
       emit("start");

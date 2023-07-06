@@ -1,5 +1,5 @@
 <template>
-  <LInfo class="visible" :class="{ 'hidden': !show}">
+  <LInfo class="visible !h-4/5" :class="{ 'hidden': !show} ">
     <template #title>
       Please tell us something about yourself
 

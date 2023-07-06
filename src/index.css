@@ -6,6 +6,7 @@
 .heading1 {
     @apply font-semibold
     capitalize
+    font-custom
     text-4xl
     h8:text-5xl
     k15:text-6xl

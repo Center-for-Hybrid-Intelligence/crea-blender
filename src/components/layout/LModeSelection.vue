@@ -11,7 +11,8 @@
     </div>
 
     <div class="p-2 px-4 bg-black  absolute w-full bottom-12 bg-opacity-50">
-      <div class="font-bold text-2xl text-white">
+      <div class="font-bold text-2xl text-white     font-custom
+">
         <slot name="title" class=""></slot>
       </div>
         <div class="text-md  text-white">

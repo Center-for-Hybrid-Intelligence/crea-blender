@@ -1,11 +1,11 @@
 <template>
   <div class="w-screen h-screen">
 
-    <ChallengeInfo v-if="!challengeStarted" @start="startChallenge"/>
+    <ChallengeInfo :show="!challengeStarted" @start="startChallenge"/>
     <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
         <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge"/>
     </div>
-    <ChallengeDone v-if="challengeIsDone"/>
+    <ChallengeDone :show="challengeIsDone"/>
   </div>
 </template>
 

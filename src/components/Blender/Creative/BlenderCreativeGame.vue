@@ -18,7 +18,7 @@
           <ImageWithSlider @change="handleSlider5Change"/>
         </div>
       </div>
-      <div class=" flex flex-col absolute right-12">
+      <div class=" flex flex-col absolute right-12 bottom-12">
         <button @click="end" class="buttonSecondary m-auto mt-4 ">Finish</button>
       </div>
 </div>

@@ -1,5 +1,5 @@
 <template>
-  <LInfo>
+  <LInfo :show="show">
     <template #title>
       <h1 class="self-center">
         Well done!
@@ -29,7 +29,13 @@ import LInfo from "@/components/layout/LInfo.vue";
 
 export default {
   name: "CreativeDone",
-  components: {LInfo}
+  components: {LInfo},
+  props: {
+    show:{
+      type: Boolean,
+      default: false,
+    }
+  }
 }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
 
-  <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
+  <CreativeInfo :show="!challengeStarted" @start="startChallenge"/>
     <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
 
   <CreativeGame  @end="endChallenge" />
    </div>
-  <CreativeDone v-if="challengeIsDone"/>
+  <CreativeDone :show="challengeIsDone"/>
 
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="w-screen h-screen">
-  <CreativeInfo v-if="!challengeStarted" @start="startChallenge"/>
+  <CreativeInfo :show="!challengeStarted" @start="startChallenge"/>
     <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
     <div class="">
       <div class="w-full flex flex-col justify-center items-center absolute top-12 gap-2 ">
@@ -51,7 +51,7 @@
     </div>
 
     <TileGallery @close="toggleGallery" :createdShapes="myChains" :visible="showGallery"/>
-  <CreativeDone v-if="challengeIsDone"/>
+  <CreativeDone  :show="challengeIsDone"/>
   </div>
 </template>
 
