@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
+*{
+    @apply
+    font-custom
+}
 .heading1 {
     @apply font-semibold
     capitalize

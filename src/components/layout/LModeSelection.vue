@@ -6,7 +6,7 @@
     <div v-if="locked" class="absolute flex items-center justify-center w-full h-full">
       <img src="../../../src/assets/locked.png" alt="Placeholder Image" class="w-24 object-contain ">
     </div>
-    <div class="imageFrame bg-gray-200 h-52 rounded-t-lg w-full">
+    <div class="imageFrame bg-gray-200 h-52 rounded-t-lg w-full test">
         <img :src="require(`../../assets/${img}`)" alt="Game selection" class="rounded-t-lg object-cover h-full">
     </div>
 
@@ -15,7 +15,7 @@
 ">
         <slot name="title" class=""></slot>
       </div>
-        <div class="text-md  text-white">
+        <div class="text-lg font-custom text-white">
       <slot name="body"></slot>
         </div>
     </div>
@@ -51,5 +51,12 @@ export default {
 </script>
 
 <style scoped>
+/*
+.test {
+  -webkit-clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+  clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+}
+*/
+
 
 </style>
