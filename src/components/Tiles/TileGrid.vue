@@ -97,7 +97,6 @@ export default {
     });
     function createGrid(size, filledCount) {
       if (props.chain) {
-        console.log(props.chain, "found chain")
         return props.chain
       }
 

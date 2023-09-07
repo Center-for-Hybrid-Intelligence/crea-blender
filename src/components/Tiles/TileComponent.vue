@@ -66,7 +66,6 @@ export default {
     const tile = ref(null);
 
     const tileSize = computed(() => {
-      console.log(props.size)
       return props.size;
     });
 

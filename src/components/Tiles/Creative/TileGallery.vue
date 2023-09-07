@@ -65,6 +65,7 @@ export default {
 
   },
   setup() {
+
     document.addEventListener('mousemove', function (event) {
       const gradientContainer = document.getElementById('gradient-container');
       const xPos = event.clientX / window.innerWidth * 5 - 1;

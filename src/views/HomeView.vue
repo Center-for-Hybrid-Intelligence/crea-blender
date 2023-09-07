@@ -17,11 +17,12 @@
 ">
       Crea. Games
     </h1>
-    <div class="flex gap-20 flex-wrap m-12 justify-center     font-custom
+    <div class="flex gap-20 flex-wrap m-12 justify-center font-custom
 ">
       <LGameCard
           :path="'/tiles'"
           :img="'tiles.jpg'"
+          :color="'text-[#89f2f2]'"
       >
         <template #title1>
           Crea.
@@ -36,12 +37,13 @@
       <LGameCard
           :path="'/blender'"
           :img="'blending.jpg'"
+          :color="'text-[#89f2f2]'"
       >
         <template #title1>
-          Crea.
+            Crea.
         </template>
         <template #title2>
-          Blender
+            Blender
         </template>
         <template #description>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias.
