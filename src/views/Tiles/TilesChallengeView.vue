@@ -1,7 +1,7 @@
 <template>
   <ChallengeInfo @start="startChallenge"  :show="!challengeStarted"  />
   <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }" class="transition-all duration-500 ">
-  <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge" :solution="solution" :currentShape="currentShape" />
+  <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge" :solution="solutionRecreate" :currentShape="currentShapeRecreate" />
   </div>
   <ChallengeDone :show="challengeIsDone" />
 </template>
@@ -21,8 +21,8 @@ export default {
     const challengeStarted = ref(false);
     const challengeIsDone = ref(false);
     const currentGame = ref('FindBestFigureGame');
-    const currentShape = ref(null);
-    const solution = ref(null);
+    const currentShapeRecreate = ref(null);
+    const solutionRecreate = ref(null);
 
 
     const startChallenge = () => {
@@ -33,12 +33,12 @@ export default {
       console.log("end");
       challengeIsDone.value = true;
     }
-    const navigateToGame = (game, shape, solution) => {
-      currentGame.value = game;
-      if (shape && solution){
-      currentShape.value = shape
-      solution.value = solution
+    const navigateToGame = (game, currentShape, solution) => {
+      if (currentShape && solution){
+        currentShapeRecreate.value = currentShape
+        solutionRecreate.value = solution
       }
+      currentGame.value = game;
     };
 
     return {
@@ -48,8 +48,8 @@ export default {
       challengeIsDone,
       currentGame,
       navigateToGame
-      ,currentShape,
-      solution
+      ,currentShapeRecreate,
+      solutionRecreate
     }
   }
 }

@@ -4,15 +4,9 @@
     <div class="relative z-10 ">
       <Header/>
 
-      <router-view v-slot="{Component, route}" class="absolute inset-0">
-        <transition
-        :enter-active-class="route.meta.enterClass"
-        :leave-active-class="route.meta.leaveClass"
-        >
+      <router-view v-slot="{Component}" class="absolute inset-0">
           <component :is="Component"/>
-        </transition>
       </router-view>
-
     </div>
   </div>
 
