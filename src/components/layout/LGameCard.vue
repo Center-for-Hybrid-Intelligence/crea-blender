@@ -4,10 +4,11 @@
       <img :src="require(`../../assets/${img}`)" alt="Game selection"
            class=" h-full w-full object-cover rounded-xl absolute inset-0 z-0 transition-all duration-300 group-hover:scale-125 group-hover:blur-sm"/>
       <slot name="image"></slot>
-      <p class="text-4xl font-bold text-white z-50 absolute self-center top-4 left-4 transition-all duration-300 group-hover:text-5xl p-2 group-hover:translate-y-12" :class="'group-hover:' + color">
+      <p class="text-4xl font-bold text-white z-50 absolute self-center top-4 left-4 transition-all duration-300 group-hover:text-5xl p-2 group-hover:translate-y-12">
         <slot name="title1"></slot>
       </p>
-      <p class="text-4xl font-bold text-white z-10 absolute bottom-4 right-4 transition-all duration-300 group-hover:text-5xl  p-2 group-hover:-translate-y-48" :class="'group-hover:' + color">
+      <p class="text-4xl font-bold text-white z-10 absolute bottom-4 right-4 transition-all duration-300  p-2 group-hover:-translate-y-48 " :class="' group-hover:text-5xl  group-hover:' + color"
+      >
         <slot name="title2"></slot>
       </p>
       <p class="text-xl text-container font-bold text-white z-10 absolute -bottom-48 p-4 transition-all duration-300 group-hover:bottom-0">

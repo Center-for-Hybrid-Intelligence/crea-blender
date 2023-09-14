@@ -21,9 +21,15 @@
           :border-size="borderSize"
           :draggable="editable"
           @save-chain="saveChain"
-          :devTile="devMode"
-      />
-      <div class="center-marker" ref="centerMarker"
+        :devTile="devMode"
+
+    />
+<!--
+    :devTile="true"
+-->
+
+
+    <div class="center-marker" ref="centerMarker"
       :style="{
   'visibility': devMode ? 'visible' : 'hidden',}"
       ></div>
@@ -33,7 +39,7 @@
 </template>
 <script>
 import Tile from "@/components/Tiles/TileComponent.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {onMounted} from "vue";
 import mp3File from '@/assets/audio/placeTile.mp3'; // Replace 'file.mp3' with your actual file path
 
@@ -86,6 +92,7 @@ export default {
     const grid = ref(createGrid(props.gridSize, props.filledCount));
     let draggedTileIndex = null;
     const tiles = ref([]);
+    const dropCount = ref(0);
 
     const gridContainer = ref(null);
 
@@ -140,18 +147,101 @@ export default {
       setTimeout(() => tiles.value[index].classList.add("hide"), 0);
     }
 
+    watch(dropCount, (newCount) => {
+      // Emit the new count to the parent component
+      emit("update:dropCount", newCount);
+    });
+
+
     function drop(index) {
       tiles.value[draggedTileIndex].classList.remove("hide");
+
       if (!tiles.value[index].classList.contains("filled") && isValidMove(draggedTileIndex, index)) {
         const audio = new Audio(mp3File);
         audio.play();
+
+
         grid.value[draggedTileIndex].filled = false;
         grid.value[index].filled = true;
 
+        tiles.value[index].classList.remove("preview");
+
+        // Shift the tiles if necessary
+        shiftTilesIfNeeded();
         updateCenterMarker(); // Update the position of the center marker
+        dropCount.value++;
+
       }
+
       draggedTileIndex = null;
     }
+    function shiftTilesIfNeeded() {
+      const gridSize = props.gridSize;
+      const gridSizeSquared = gridSize * gridSize;
+      const filledIndices = [];
+
+      // Collect indices of filled tiles
+      for (let i = 0; i < gridSizeSquared; i++) {
+        if (grid.value[i] && grid.value[i].filled) {
+          filledIndices.push(i);
+        }
+      }
+
+      // Check if there are filled tiles in the first row
+      const hasFilledInFirstRow = filledIndices.some((index) => index < gridSize);
+
+      // Check if there are filled tiles in the last row
+      const hasFilledInLastRow = filledIndices.some((index) => index >= gridSizeSquared - gridSize);
+
+
+      if (hasFilledInFirstRow) {
+        // Create a new row with all filled: false
+        const newRow = Array.from({ length: gridSize }, () => ({ filled: false }));
+
+        // Remove the last row from the grid
+        grid.value.splice(gridSizeSquared - gridSize, gridSize);
+
+        // Insert the new row at the beginning
+        grid.value.unshift(...newRow);
+      } else if (hasFilledInLastRow) {
+        // Create a new row with all filled: false
+        const newRow = Array.from({ length: gridSize }, () => ({ filled: false }));
+
+        // Remove the first row from the grid
+        grid.value.splice(0, gridSize);
+
+        // Push the new row at the end
+        grid.value.push(...newRow);
+      }
+      // Check if there are filled tiles in the leftmost column
+      const hasFilledInLeftCol = filledIndices.some((index) => index % gridSize === 0);
+
+      // Check if there are filled tiles in the rightmost column
+      const hasFilledInRightCol = filledIndices.some((index) => index % gridSize === gridSize - 1);
+
+      if (hasFilledInRightCol) {
+        // Remove the entire left column from right to left
+        for (let i = gridSize - 1; i >= 0; i--) {
+          grid.value.splice(i * gridSize, 1);
+        }
+
+        // Add an empty column to the right of the grid from left to right
+        for (let i = 0; i < gridSize; i++) {
+          grid.value.splice((i + 1) * gridSize - 1, 0, { filled: false });
+        }
+      } else if (hasFilledInLeftCol) {
+        // Remove the entire right column from right to left
+        for (let i = gridSize - 1; i >= 0; i--) {
+          grid.value.splice((i + 1) * gridSize - 1, 1);
+        }
+
+        // Add an empty column to the left of the grid from left to right
+        for (let i = 0; i < gridSize; i++) {
+          grid.value.splice(i * gridSize, 0, { filled: false });
+        }
+      }
+    }
+
 
 
 
@@ -260,7 +350,7 @@ export default {
     function updateCenterMarker() {
       const chainCenter = findChainCenter();
 
-      const markerSize = 10; // Adjust the size of the marker as needed
+      const markerSize = 12; // Adjust the size of the marker as needed
       const gridContainerBoundingRect = gridContainer.value.getBoundingClientRect();
       const gridContainerCenterX = gridContainerBoundingRect.width / 2;
       const gridContainerCenterY = gridContainerBoundingRect.height / 2;

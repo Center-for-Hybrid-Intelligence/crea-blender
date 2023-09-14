@@ -37,7 +37,7 @@
       <LGameCard
           :path="'/blender'"
           :img="'blending.jpg'"
-          :color="'text-[#89f2f2]'"
+          :color="'text-[#f97316]'"
       >
         <template #title1>
             Crea.
