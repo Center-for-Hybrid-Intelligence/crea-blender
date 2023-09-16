@@ -27,11 +27,9 @@ export default {
 
 
     const startChallenge = () => {
-      console.log("start");
       challengeStarted.value = true;
     }
     const endChallenge = () => {
-      console.log("end");
       challengeIsDone.value = true;
     }
     const navigateToGame = (game, currentShape, solution, solutionInfo) => {

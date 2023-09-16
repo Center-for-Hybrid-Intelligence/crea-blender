@@ -1,18 +1,21 @@
 <template>
-  <div class="flex flex-col h-screen w-screen justify-center items-center gap-12">
-    <h1 class="font-extrabold text-5xl text-[#89f2f2] font-custom">
+  <div class="flex flex-col  min-h-screen w-screen justify-center  items-center">
+    <h1 class="font-extrabold k1:text-7xl text-5xl py-12 text-tilesBlue font-custom">
       Crea. Tiles
     </h1>
-  <div class="flex justify-evenly w-screen  ">
-    <div class="flex flex-col gap-2">
+  <div class="flex flex-col k1:flex-row gap-12 k1:gap-0 justify-evenly w-screen h-full pb-12 ">
+    <div class="flex flex-col justify-between gap-4 items-center ">
       <TutorialModeChallenges/>
-      <img src="../../../src/assets/downArrow.png" alt="Down arrow" class="h-8 object-contain">
+      <img src="../../../src/assets/downArrow.svg" alt="Down arrow" class="h-10  object-contain">
       <ChallengeMode/>
     </div>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col items-center justify-between gap-4">
       <TutorialModeCreative/>
-      <img src="../../../src/assets/downArrow.png" alt="Down arrow" class="h-8 object-contain ">
-      <div class="flex gap-8">
+      <div class="flex gap-24">
+      <img src="../../../src/assets/downArrow.svg" alt="Down arrow" class="h-10 object-contain transform k1:rotate-45 rotate-0 ">
+      <img src="../../../src/assets/downArrow.svg" alt="Down arrow" class="h-10 object-contain transform k1:-rotate-45 rotate-0 ">
+      </div>
+      <div class="flex flex-col k1:flex-row gap-8 justify-center">
       <CreativeModeDogs/>
       <CreativeModeDigits/>
       </div>

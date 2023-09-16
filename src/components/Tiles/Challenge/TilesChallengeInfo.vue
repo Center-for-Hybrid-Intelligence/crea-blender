@@ -14,7 +14,7 @@
             </div>
             <div class="w-4/5 flex items-center">
               <p>
-                Select a shape from the four small shapes on the left from which you think it woll take the least amount of moves to recreate the target shape on the right. Then recreate the target shape you see on the right.
+                Select a shape from the four small shapes on the left from which you think it will take the least amount of moves to recreate the target shape on the right. Then recreate the target shape you see on the right.
               </p>
             </div>
 

@@ -28,7 +28,7 @@
       <TileGrid
           class=" "
           :filledCount="10"
-          :gridSize="10"
+          :gridSize="12"
           :tileSize="60"
           :gap="8"
           :borderRadius="0.5"
@@ -80,20 +80,17 @@ export default {
     const challengeIsDone = ref(false);
 
     const startChallenge = () => {
-      console.log("start");
       challengeStarted.value = true;
       startTimer()
     }
     const endChallenge = () => {
-      console.log("end");
       challengeIsDone.value = true;
     }
 
-    const timer = ref(5);
+    const timer = ref(120);
 
     const saveChain = (chain) => {
       animatedChain.value = chain; // Deep copy
-      console.log(animatedChain)
       // Check if the chain already exists in the myChains.value array
       const chainExists = myChains.value.some((existingChain) => {
         return JSON.stringify(existingChain) === JSON.stringify(chain);
@@ -116,7 +113,6 @@ export default {
         setTimeout(() => {
           showError.value = false;
         }, 1500)
-        console.log(chain + " already exists in the array and won't be added again.");
       }
     };
 

@@ -27,7 +27,7 @@
         <!--        {{shape}}-->
         <TileGrid
             :filledCount="10"
-            :gridSize="10"
+            :gridSize="12"
             :tileSize="12"
             :borderRadius="0.2"
             :border-size="0.14"

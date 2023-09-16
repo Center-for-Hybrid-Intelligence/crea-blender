@@ -12,7 +12,6 @@ export default {
   setup(props, {emit}) {
 
     const end = () => {
-      console.log(end, "asd")
       emit("end");
     }
     return {

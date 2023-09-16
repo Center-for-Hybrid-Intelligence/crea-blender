@@ -3,7 +3,7 @@
     <div id="gradient-container" class="absolute inset-0"></div>
     <div class="relative z-10 ">
       <Header/>
-      <router-view v-slot="{Component}" class="absolute inset-0">
+      <router-view v-slot="{Component}" >
           <component :is="Component"/>
       </router-view>
     </div>

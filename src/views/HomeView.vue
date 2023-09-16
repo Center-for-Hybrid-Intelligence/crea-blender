@@ -22,7 +22,7 @@
       <LGameCard
           :path="'/tiles'"
           :img="'tiles.jpg'"
-          :color="'text-[#89f2f2]'"
+          :color="'text-tilesBlue'"
       >
         <template #title1>
           Crea.
@@ -37,7 +37,7 @@
       <LGameCard
           :path="'/blender'"
           :img="'blending.jpg'"
-          :color="'text-[#f97316]'"
+          :color="'text-blenderOrange'"
       >
         <template #title1>
             Crea.

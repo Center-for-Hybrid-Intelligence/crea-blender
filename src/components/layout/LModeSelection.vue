@@ -1,29 +1,36 @@
 <template>
-  <div :class="{ 'opacity-50': locked, 'hover': !locked }" class="lModeSelection sca relative ">
-<!--
-    <router-link :to="path">
--->
+  <div :class="{ 'opacity-50': locked, 'hover': !locked }" class="lModeSelection hover:shadow-2xl shadow-md rounded-lg relative ">
+    <!--
+        <router-link :to="path">
+    -->
     <div v-if="locked" class="absolute flex items-center justify-center w-full h-full">
       <img src="../../../src/assets/locked.png" alt="Placeholder Image" class="w-24 object-contain ">
     </div>
+<!--
     <div class="imageFrame bg-gray-200 h-52 rounded-t-lg w-full test">
-        <img :src="require(`../../assets/${img}`)" alt="Game selection" class="rounded-t-lg object-cover h-full">
+-->
+    <div class="imageFrame bg-gray-200 h-52 rounded-lg w-full test">
+<!--
+      <img :src="require(`../../assets/${img}`)" alt="Game selection" class="rounded-t-lg object-cover h-full">
+-->
+      <img :src="require(`../../assets/${img}`)" alt="Game selection" class="rounded-lg object-cover h-full">
     </div>
 
+<!--
     <div class="p-2 px-4 bg-black  absolute w-full bottom-12 bg-opacity-50">
-      <div class="font-bold text-2xl text-white     font-custom
+-->
+    <div class="p-2 px-4 bg-black  absolute w-full rounded-b-lg bottom-0 bg-opacity-50">
+      <div class="font-bold text-2xl text-white font-custom
 ">
         <slot name="title" class=""></slot>
       </div>
-        <div class="text-lg font-custom text-white">
-      <slot name="body"></slot>
-        </div>
+      <div class="text-lg font-custom text-white">
+        <slot name="body"></slot>
+      </div>
     </div>
-    <div class="" >
+    <div class="">
       <slot name="button" class=""></slot>
     </div>
-
-
 
   </div>
 
@@ -39,13 +46,13 @@ export default {
       default: false
     },
     img: {
-      type:String,
-      required: true
-    },
-   /* path: {
       type: String,
       required: true
-    },*/
+    },
+    /* path: {
+       type: String,
+       required: true
+     },*/
   }
 }
 </script>
