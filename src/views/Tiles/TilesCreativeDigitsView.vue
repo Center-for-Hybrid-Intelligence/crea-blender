@@ -1,60 +1,50 @@
 <template>
 
-  <CreativeInfo  @start="startChallenge"  :show="!challengeStarted"/>
+  <CreativeInfo @start="startChallenge" :show="!challengeStarted"/>
   <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }">
 
-  <div class="">
-    <div class="w-full flex flex-col justify-center items-center absolute top-12 gap-2 ">
-      <div @click="$refs.tileGrid.saveChain()"
-           class="z-30 rounded-full border-white border-8 aspect-square h-28 w-28 group hover cursor-pointer">
-        <img draggable="false" src="../../assets/camera.png" class="p-4" alt="">
-        <div :class="{light: enabled, redLight: redEnabled }">
+    <div class="">
+      <div class="w-full flex flex-col justify-center items-center absolute top-12 gap-2 ">
+        <div @click="$refs.tileGrid.saveChain()"
+             class="z-30 rounded-full border-white border-8 aspect-square h-28 w-28 group hover cursor-pointer">
+          <img draggable="false" src="../../assets/camera.png" class="p-4" alt="">
+          <div :class="{light: enabled, redLight: redEnabled }">
+          </div>
+        </div>
+        <div class="" v-if="showError">
+          <h1 v-if="showError" class="text-white opacity-100" :class=" { showError :  'opacity-100' } "
+              :key="showError">Figure already exist in gallery</h1>
         </div>
       </div>
-      <div class="" v-if="showError">
-      <h1 v-if="showError" class="text-white opacity-100" :class=" { showError :  'opacity-100' } " :key="showError">Figure already exist in gallery</h1>
+
+
+    </div>
+    <div class="fixed z-50 right-12 bottom-12 flex items-center justify-center text-white text-3xl font-bold">
+      <TimerComponent :timer="timer"/>
+      <div v-if="timer < 0 " class=" flex flex-col ">
+        <button @click="endChallenge" class="buttonBlue">Finish</button>
       </div>
-    </div>
 
-
-  </div>
-  <div class="absolute right-12 bottom-12 flex items-center justify-center text-white text-3xl font-bold">
-    <div v-if="timer >= 0">
-      {{ timer }}
     </div>
-    <div v-if="timer < 0 " class=" flex flex-col ">
-      <button @click="endChallenge" class="buttonSecondary z-30">Finish</button>
+    <div class="w-screen h-screen overflow-hidden group-hover:border-black group-hover:border-2 border-black p-12">
+      <TileGrid
+          class=" "
+          :filledCount="10"
+          :gridSize="12"
+          :tileSize="60"
+          :gap="8"
+          :borderRadius="0.5"
+          :border-size="0.3"
+          :editable="true"
+          ref="tileGrid"
+          @save-chain="saveChain"
+          :devMode="false"
+      ></TileGrid>
     </div>
+    <TileGalleryImage :my-chains="myChains" :toggle-gallery="toggleGallery"/>
+    <TileGallery @close="toggleGallery" :createdShapes="myChains" :visible="showGallery"/>
   </div>
-  <div class="w-screen h-screen overflow-hidden group-hover:border-black group-hover:border-2 border-black p-12">
-    <TileGrid
-        class=" "
-        :filledCount="10"
-        :gridSize="12"
-        :tileSize="60"
-        :gap="8"
-        :borderRadius="0.5"
-        :border-size="0.3"
-        :editable="true"
-        ref="tileGrid"
-        @save-chain="saveChain"
-        :devMode="false"
-    ></TileGrid>
-  </div>
-
-  <div @click="toggleGallery" draggable="false"
-       class="fixed top-12 right-12 cursor-pointer transition-all hover:animate-wiggle z-30">
-    <img draggable="false" class="w-20 h-20" src="@/assets/imageGallery.svg" alt="Open gallery">
-    <div class="h-8 w-8 rounded-full bg-green-500 absolute -bottom-2 -right-2 justify-center align-middle flex">
-      <h2 class="text-white text-xl self-center">
-        {{ myChains.length }}
-      </h2>
-    </div>
-  </div>
-
-  <TileGallery @close="toggleGallery" :createdShapes="myChains" :visible="showGallery"/>
-    </div>
-  <CreativeDone  :show="challengeIsDone"/>
+  <CreativeDone :show="challengeIsDone"/>
 
 
 </template>
@@ -65,9 +55,13 @@ import TileGallery from "@/components/Tiles/Creative/TileGallery.vue";
 import mp3File from '@/assets/audio/flash.mp3';
 import CreativeInfo from "@/components/Tiles/Creative/TilesCreativeInfoDigits.vue";
 import CreativeDone from "@/components/Tiles/Creative/TilesCreativeDone.vue";
+import TimerComponent from "@/components/Tiles/Timer.vue";
+import TileGalleryImage from "@/views/Tiles/TileGalleryImage.vue";
 
 export default {
   components: {
+    TileGalleryImage,
+    TimerComponent,
     TileGallery,
     TileGrid,
     CreativeDone,
@@ -119,7 +113,7 @@ export default {
           redEnabled.value = false;
         }, 500)
         setTimeout(() => {
-        showError.value = false;
+          showError.value = false;
         }, 1500)
       }
     };
@@ -157,9 +151,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
 
 
 </style>

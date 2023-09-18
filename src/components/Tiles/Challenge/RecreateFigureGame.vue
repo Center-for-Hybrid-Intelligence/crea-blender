@@ -1,10 +1,19 @@
 <template>
+  <div class="k1:overflow-hidden k1:w-screen k1:h-screen">
+    <div class="fixed right-12 top-12 z-50 flex items-center justify-center text-white text-3xl font-bold">
+      Round: {{roundNumber}} / 3
+    </div>
   <div class="transition-all duration-500  absolute w-full h-full z-20 opacity-0 pointer-events-none "
        :class="{' opacity-100 pointer-events-auto' : areAllSame(solution, currentShape) }">
-    <TilesChallengeWellDone show @click="changeGame('FindBestFigureGame')" :dropCountAmount="dropCount"/>
+    <div class="" v-if="roundNumber <= 2">
+    <TilesChallengeWellDone show @navigateToGame="changeGame('FindBestFigureGame')"  @increment="incrementRoundNumber" :dropCountAmount="dropCount"/>
+  </div>
+    <div class="" v-else-if="roundNumber === 3">
+      <ChallengeDone  :dropCountAmount="dropCount" show/>
+    </div>
   </div>
   <div :class="{'blur-2xl' : areAllSame(solution, currentShape)}"
-       class=" transition-all duration-500 min-h-screen flex flex-col items-center">
+       class=" transition-all  duration-500 min-h-screen flex flex-col items-center">
     <div class="relative flex flex-col k1:flex-row justify-center align-middle">
       <h2 class=" k1:text-5xl text-3xl k1:pb-0 px-12 pb-8 max-w-2xl self-center text-center pt-10 text-white">Recreate
         figure in the least amount of moves</h2>
@@ -12,15 +21,12 @@
         Total Moves: {{ dropCount }}
       </h1>
     </div>
-    <div class="absolute right-12 bottom-12 flex items-center justify-center text-white text-3xl font-bold">
-      <div v-if="timer >= 0">
-        {{ timer }} sec
-      </div>
+    <div class="fixed z-50  right-12 bottom-12 flex items-center justify-center text-white text-3xl font-bold">
+      <TimerComponent :timer="timer"/>
       <div v-if="timer < 0 " class=" flex flex-col ">
-        <button @click="endChallenge('FindBestFigureGame')" class="buttonSecondary z-30">Times Up!</button>
+        <button @click="endChallenge('FindBestFigureGame')" class="buttonBlue">Times Up!</button>
       </div>
     </div>
-
 
     <div class=" flex max-h-fit k1:flex-row overflow-hidden flex-col flex-col-reverse  align-middle  justify-center">
       <TileGrid
@@ -37,10 +43,10 @@
       <div class="flex item-center justify-center overflow-hidden ">
         <div class="self-center">
 
-          <h1 class="text-2xl text-tilesBlue text-center">
+          <h1 class="text-2xl text-tilesBlue  text-center">
             Goal Figure:
           </h1>
-          <div class="border-4 rounded-xl self-center">
+          <div class="shadow-xl transition-all duration-300 border-2 border-white  self-end justify-center  flex">
             <TileGrid class="h-fit " :filledCount="10"
                       :gridSize="12"
                       :tileSize="12"
@@ -50,10 +56,7 @@
 
           </div>
         </div>
-
       </div>
-
-
       <div class=" flex flex-col fixed right-12 bottom-12 ">
         <!--
                 <button @click="changeGame('FindBestFigureGame')" class="button self-center mt-8">Continue</button>
@@ -63,19 +66,20 @@
         -->
       </div>
     </div>
-
   </div>
-
+  </div>
 </template>
 
 <script>
 import {ref} from "vue";
 import TileGrid from "@/components/Tiles/TileGrid.vue";
 import TilesChallengeWellDone from "@/components/Tiles/Challenge/TilesChallengeWellDone.vue";
+import TimerComponent from "@/components/Tiles/Timer.vue";
+import ChallengeDone from "@/components/Tiles/Challenge/TilesChallengeDone.vue";
 
 export default {
   name: "RecreateFigure",
-  components: {TilesChallengeWellDone, TileGrid},
+  components: {ChallengeDone, TimerComponent, TilesChallengeWellDone, TileGrid},
   props: {
     currentShape: {
       type: Array,
@@ -88,6 +92,8 @@ export default {
     solutionInfo: {
       type: Object,
       default: null
+    }, roundNumber:{
+      type:Number
     }
   },
   emits: [
@@ -101,6 +107,12 @@ export default {
     const bestSolutionIndex = ref(props.solutionInfo.optimalSolutionIndex)
     const bestSolutionMovesAmount = ref(props.solutionInfo.optimalSolutionMoves)
     const timer = ref(60);
+    console.log(bestSolutionIndex.value, bestSolutionMovesAmount.value, "solution info from inhere")
+
+
+    const incrementRoundNumber = () => {
+      emit("increment")
+    }
 
     const startTimer = () => {
       const countdown = setInterval(() => {
@@ -111,11 +123,9 @@ export default {
       }, 1000);
     }
 
-    const endChallenge = (game) => {
-      emit('navigateToGame', game);
-
+    const endChallenge = () => {
+      emit('endChallenge');
     }
-    console.log(bestSolutionIndex.value, bestSolutionMovesAmount.value, "solution info from inhere")
 
     function areAllSame(solution, currentShape) {
       let solutionNormalised = normalizeShape(solution)
@@ -156,7 +166,6 @@ export default {
     startTimer()
 
     const startChallenge = () => {
-      console.log("start");
       challengeStarted.value = true;
     }
     const end = () => {
@@ -175,7 +184,8 @@ export default {
       dropCount,
       startTimer,
       timer,
-      endChallenge
+      endChallenge,
+        incrementRoundNumber
     }
   }
 }

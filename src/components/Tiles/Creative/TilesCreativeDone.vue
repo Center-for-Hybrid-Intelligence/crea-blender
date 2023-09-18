@@ -15,7 +15,7 @@
 
     <template #button>
       <router-link to="/" >
-        <button class="button">
+        <button class="buttonBlue">
           Menu
         </button>
       </router-link>

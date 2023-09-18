@@ -2,8 +2,12 @@
   <LInfo :show="show">
     <template #title>
       <h1 class="self-center">
-        Well done!
-        You have completed a challenge!
+        Good Job! <br>
+        You Completed Challenge Mode!<br>
+        You finished last round in
+        <span class="text-green-500">
+         {{ dropCountAmount }} Moves
+          </span>
       </h1>
     </template>
     <template #body>
@@ -15,7 +19,7 @@
 
     <template #button>
       <router-link to="/" >
-        <button class="button">
+        <button class="buttonBlue">
           Menu
         </button>
       </router-link>
@@ -34,6 +38,8 @@ export default {
     show:{
     type: Boolean,
     default: false,
+    }, dropCountAmount: {
+      type: Number
     }
   }
 

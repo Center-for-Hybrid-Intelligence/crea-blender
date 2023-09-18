@@ -1,9 +1,9 @@
 <template>
   <ChallengeInfo @start="startChallenge"  :show="!challengeStarted"  />
   <div :class="{ 'blur-2xl': !challengeStarted || challengeIsDone }" class="transition-all duration-500 ">
-  <component :is="currentGame" @navigateToGame="navigateToGame" @end="endChallenge" :solution="solutionRecreate" :solutionInfo="solutionInfoRecreate" :currentShape="currentShapeRecreate" />
+  <component :is="currentGame" @endChallenge="endChallenge" @increment="increment"  :roundNumber="roundNumber"
+             :start="challengeStarted" @navigateToGame="navigateToGame" @end="endChallenge" :solution="solutionRecreate" :solutionInfo="solutionInfoRecreate" :currentShape="currentShapeRecreate" />
   </div>
-  <ChallengeDone :show="challengeIsDone" />
 </template>
 
 
@@ -19,18 +19,21 @@ export default {
   components: {ChallengeDone, ChallengeInfo, FindBestFigureGame, RecreateFigureGame},
   setup() {
     const challengeStarted = ref(false);
-    const challengeIsDone = ref(false);
+    const roundNumber = ref(1);
     const currentGame = ref('FindBestFigureGame');
     const currentShapeRecreate = ref(null);
     const solutionRecreate = ref(null);
     const solutionInfoRecreate = ref(null);
 
-
     const startChallenge = () => {
       challengeStarted.value = true;
     }
-    const endChallenge = () => {
+/*    const endChallenge = () => {
       challengeIsDone.value = true;
+    }*/
+    const increment = () => {
+      roundNumber.value += 1;
+      console.log(roundNumber.value, "in here " )
     }
     const navigateToGame = (game, currentShape, solution, solutionInfo) => {
       if (currentShape && solution){
@@ -43,14 +46,14 @@ export default {
 
     return {
       startChallenge,
-      endChallenge,
       challengeStarted,
-      challengeIsDone,
       currentGame,
       navigateToGame
       ,currentShapeRecreate,
       solutionRecreate,
-      solutionInfoRecreate
+      solutionInfoRecreate,
+      increment,
+      roundNumber
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <LInfo :show="show">
     <template #title>
-      <h1 class="  ">
+      <h1 class=" !text-blenderOrange ">
         Well done!
         You have completed a challenge!
       </h1>
@@ -16,7 +16,7 @@
 
     <template #button>
       <router-link to="/">
-        <button class="button">
+        <button class="buttonOrange">
           Menu
         </button>
       </router-link>

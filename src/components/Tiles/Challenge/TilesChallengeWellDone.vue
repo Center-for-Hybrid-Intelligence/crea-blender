@@ -5,7 +5,6 @@
         Well done! <br>
         You have completed a challenge in
         <span class="text-green-500">
-
         {{ dropCountAmount }} Moves
         </span>
       </h1>
@@ -18,11 +17,11 @@
     </template>
 
     <template #button>
-      <router-link to="/tiles/challenges" >
-        <button class="button">
+      <div @click="handleClick" >
+        <button class="buttonBlue">
           Continue
         </button>
-      </router-link>
+      </div>
     </template>
 
   </LInfo>
@@ -42,6 +41,16 @@ export default {
     dropCountAmount:{
       type: Number,
       default: 0,
+    }
+  },
+  setup(_, {emit}){
+    const handleClick = () => {
+      emit('increment');
+      emit('navigateToGame', 'FindBestFigureGame')
+    };
+
+    return {
+      handleClick
     }
   }
 

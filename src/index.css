@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     @apply
     font-custom
 }
+
 .heading1 {
     @apply font-semibold
     capitalize
@@ -16,16 +17,17 @@
     my-10;
 }
 
-.hover{
+.hover {
     scale: 1;
     transition: all;
     transition-duration: 300ms;
 }
-.hover:hover{
+
+.hover:hover {
     scale: 1.05;
 }
 
-.button{
+.button {
     width: 10rem;
     color: white;
     border-radius: .25rem;
@@ -36,10 +38,12 @@
     cursor: pointer;
     border: none;
 }
-.button:hover{
+
+.button:hover {
     background-color: rgba(50, 205, 50, 0.8);
 }
-.buttonSecondary{
+
+.buttonSecondary {
     width: 10rem;
     color: rgba(50, 205, 50, 1);
     border-radius: .25rem;
@@ -50,9 +54,53 @@
     transition-duration: 200ms;
     cursor: pointer;
 }
-.buttonSecondary:hover{
+
+.buttonBlue {
+    @apply
+    w-40
+    text-center
+    p-2
+    text-3xl
+    text-slate-600
+    rounded-lg
+    border-2
+    border-tilesBlue
+    shadow-2xl
+    transition-all
+    duration-200
+    bg-tilesBlue
+    cursor-pointer
+}
+
+.buttonBlue:hover {
+    @apply
+    opacity-80
+}
+.buttonOrange {
+    @apply
+    w-40
+    text-center
+    p-2
+    text-3xl
+    text-white
+    rounded-lg
+    border-2
+    border-blenderOrange
+    shadow-2xl
+    transition-all
+    duration-200
+    bg-blenderOrange
+    cursor-pointer
+}
+
+.buttonBlue:hover {
+    @apply
+    opacity-80
+}
+
+.buttonSecondary:hover {
     background-color: rgba(50, 205, 50, 0.8);
-    color:white;
+    color: white;
 }
 
 @keyframes redflash {
@@ -100,6 +148,7 @@
         height: 0;
     }
 }
+
 .light {
     position: absolute;
     top: 50%;

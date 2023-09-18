@@ -1,7 +1,7 @@
 <template>
   <LInfo :show="show">
     <template #title>
-      <h1 class="self-center">
+      <h1 class="self-center !text-blenderOrange">
       Challenge mode
       </h1>
     </template>
@@ -20,7 +20,7 @@
     </template>
 
     <template #button>
-      <button @click="start" class="button">
+      <button @click="start" class="buttonOrange">
         Start
       </button>
     </template>

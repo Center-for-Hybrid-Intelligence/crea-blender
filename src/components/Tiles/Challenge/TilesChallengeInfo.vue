@@ -44,7 +44,7 @@
     </template>
 
     <template #button>
-      <button @click="start" class="button">
+      <button @click="start" class="buttonBlue">
         Start
       </button>
     </template>
